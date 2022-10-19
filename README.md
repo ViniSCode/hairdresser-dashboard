@@ -1,1 +1,2 @@
-# Work in progress# hairdresser-dashboard-cs50-final-project
+
+# Work in progress
