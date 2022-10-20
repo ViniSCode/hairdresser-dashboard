@@ -1,6 +1,16 @@
+import React from 'react';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
+import { LogIn } from "./pages";
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <LogIn />
+  }
+])
 
-export default function App() {
+export function App() {
   return (
-      <h1>hello, world!</h1>
+      <RouterProvider router={router} />
   );
 }
