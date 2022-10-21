@@ -1,7 +1,10 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./index.css";
 import { LogIn } from "./pages";
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -11,6 +14,9 @@ const router = createBrowserRouter([
 
 export function App() {
   return (
+    <>
+      <ToastContainer />
       <RouterProvider router={router} />
+    </>
   );
 }
