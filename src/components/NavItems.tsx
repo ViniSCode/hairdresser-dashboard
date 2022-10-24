@@ -1,8 +1,5 @@
 import { signOut } from 'next-auth/react'
-import { BsPeople, BsPersonCircle } from 'react-icons/bs'
-import { FiCalendar } from 'react-icons/fi'
-import { ImStatsBars } from 'react-icons/im'
-import { RiLogoutBoxLine } from 'react-icons/ri'
+import { FiCalendar, FiLogOut, FiPieChart, FiUser, FiUsers } from 'react-icons/fi'
 
 export function NavItems () {
   const navItems = [
@@ -14,27 +11,27 @@ export function NavItems () {
   }
 
   return (
-    <div className='mt-[5.5rem] flex flex-col gap-16'>
-      <div className='flex items-start gap-4 cursor-pointer'>
-        <FiCalendar size={24} className="text-yellow-500" />
-        <a href="" className='text-[17px] font-bold'>Appointments</a>
-      </div>
-      <div className='flex items-start gap-4'>
-        <BsPeople size={24} className="text-yellow-500" />
-        <a href="" className='text-[17px] font-bold'>Customers</a>
-      </div>
-      <div className='flex items-start gap-4'>
-        <ImStatsBars size={24} className="text-yellow-500" />
-        <a href="" className='text-[17px] font-bold'>Stats</a>
-      </div>
-      <div className='flex items-start gap-4'>
-        <BsPersonCircle size={24} className="text-yellow-500" />
-        <a href="" className='text-[17px] font-bold'>Profile</a>
-      </div>
-      <div className='flex items-start gap-4'>
-        <RiLogoutBoxLine size={24} className="text-yellow-500" />
-        <a onClick={handleLogout} className='text-[17px] font-bold'>Logout</a>
-      </div>
+    <div className='justify-center items-center lg:items-start lg:justify-start mt-[5.5rem] flex flex-col gap-14'>
+      <a href="" className='flex items-center gap-4 transition-colors hover:text-yellow-500 cursor-pointer'>
+        <FiCalendar size={22}  />
+        <span className='hidden text-[16px] font-medium lg:inline-block'>Appointments</span>
+      </a>
+      <a href="" className='flex items-center gap-4 transition-colors hover:text-yellow-500 cursor-pointer'>
+        <FiUsers size={22}  />
+        <span className='hidden text-[16px] font-medium lg:inline-block'>Customers</span>
+      </a>
+      <a href="" className='flex items-center gap-4 transition-colors hover:text-yellow-500 cursor-pointer'>
+        <FiPieChart size={22}  />
+        <span className='hidden text-[16px] font-medium lg:inline-block'>Stats</span>
+      </a>
+      <a href="" className='flex items-center gap-4 transition-colors hover:text-yellow-500 cursor-pointer'>
+        <FiUser size={22}  />
+        <span className='hidden text-[16px] font-medium lg:inline-block'>Profile</span>
+      </a>
+      <a onClick={handleLogout}  className='flex items-center gap-4 transition-colors hover:text-yellow-500 cursor-pointer'>
+        <FiLogOut size={22}  />
+        <span className='hidden text-[16px] font-medium lg:inline-block transition-colors hover:text-yellow-500'>Logout</span>
+      </a>
     </div>
   )
 }

@@ -11,7 +11,8 @@ module.exports = {
       },
       
       gridTemplateColumns: {
-        ['sidebar']: '20rem auto'
+        ['sidebar']: '20rem auto',
+        ['sidebar-mobile']: '6rem auto'
       },
       fontFamily: {
         sans: ['Roboto, sans-serif'],
@@ -56,6 +57,7 @@ module.exports = {
         },
         yellow: {
           500: '#FC9801',
+          300: '#D58823',
         }
       },
     }
