@@ -6,8 +6,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      transitionProperty: {
+        'filter': 'filter',
+      },
+      
       gridTemplateColumns: {
-        ['sidebar']: '20rem auto',
+        ['sidebar']: '20rem auto'
       },
       fontFamily: {
         sans: ['Roboto, sans-serif'],
@@ -20,7 +24,7 @@ module.exports = {
           700: '#015F43',
         },
         blue: {
-          500: '#3664FD',
+          500: '#1B59F8',
         },
         orange: {
           500: '#FF5C00',
@@ -37,11 +41,11 @@ module.exports = {
           250: '#C9C9C9',
           300: '#646466',
           350: '#7A7C7E',
-          500: '#959FB7',
+          500: '#6B6D6E',
           600: '#313236',
           700: '#1F1F21',
-          800: '#1C2340',
-          900: '#141933'
+          800: '#1C1C1D',
+          900: '#161819'
         },
         black: {
           500: '#FFFFFF',
@@ -56,4 +60,7 @@ module.exports = {
       },
     }
   },
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
 }
