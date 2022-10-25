@@ -10,6 +10,7 @@ body {
 
 @layer base {
   html {
+    user-select: none;
     font-family: 'Poppins', sans-serif;
     height: 100%;
     min-height: 100vh;

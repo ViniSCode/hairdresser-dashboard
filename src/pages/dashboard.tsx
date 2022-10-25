@@ -14,7 +14,7 @@ export default function Dashboard () {
           <Logo title="Hairdashboard"/>
           <NavItems />
         </div>
-        <div className="h-[80vh] lg:h-full">
+        <div className="h-[50vh] pr-4">
           <div className="flex items-center justify-between">
             <div className="lg:hidden">
               <Logo title="Hairdashboard"/>

@@ -11,7 +11,7 @@ module.exports = {
       },
       
       gridTemplateColumns: {
-        ['sidebar']: '16rem auto',
+        ['sidebar']: '16rem calc(100% - 18.5rem)',
         ['sidebar-mobile']: '6rem auto'
       },
       fontFamily: {

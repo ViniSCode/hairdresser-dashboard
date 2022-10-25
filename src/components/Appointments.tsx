@@ -37,7 +37,7 @@ const cards = [
 ]
 
 export function Appointments () {
-  const carousel = useRef();
+  const carousel = useRef<HTMLDivElement | any>();
   const [carouselW, setCarouselW] = useState(0)
   useEffect(() => {
     setCarouselW(carousel.current?.scrollWidth - carousel.current?.offsetWidth)
@@ -45,9 +45,8 @@ export function Appointments () {
 
   return (
     <div className='w-full h-full rounded-2xl bg-gray-900 pt-10'>
-
       <motion.div ref={carousel} whileTap={{ cursor: "grabbing" }} className="overflow-hidden cursor-grab">
-        <motion.div drag="x" dragConstraints={{right: 0, left: -carouselW}} className='w-full h-full flex items-center justify-between px-10 gap-10'>
+        <motion.div drag="x"  dragConstraints={{right: 0, left: -carouselW}} className='w-full h-full flex items-center justify-between px-10 gap-10'>
           {
             cards.map(card => (
               <motion.div key={card.id} className='flex flex-col items-center justify-center gap-1 w-fit bg-gray-800 px-16 py-4 rounded-3xl'>
