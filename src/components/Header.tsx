@@ -1,12 +1,12 @@
-interface HeaderProps {
-  title: string;
-}
+import { useSession } from "next-auth/react";
+import { UserInfo } from "./UserInfo";
 
-export function Header ({title}: HeaderProps) {
+export function Header () {
+  const {data: session} = useSession()
+
   return (
-    <header className="pt-5 mb-2 px-4 bg-gray-700">
-      <h1 className="text-white font-logo text-[26px]">{title}</h1>
-      <div className="w-full h-[2px] bg-gray-600 mt-2"></div>
-    </header>
+    <div className="bg-gray-800 pt-5 pb-5 ml-auto hidden md:block lg:block">
+      {session && <UserInfo avatar={session!.user!.image!} email={session!.user!.email!} username={session!.user!.name!}/>}
+    </div>
   )
 }

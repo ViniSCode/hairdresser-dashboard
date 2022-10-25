@@ -11,7 +11,7 @@ module.exports = {
       },
       
       gridTemplateColumns: {
-        ['sidebar']: '20rem auto',
+        ['sidebar']: '16rem auto',
         ['sidebar-mobile']: '6rem auto'
       },
       fontFamily: {
@@ -42,11 +42,11 @@ module.exports = {
           250: '#C9C9C9',
           300: '#646466',
           350: '#7A7C7E',
-          500: '#6B6D6E',
+          500: '#959FB7',
           600: '#313236',
           700: '#1F1F21',
-          800: '#1C1C1D',
-          900: '#161819'
+          800: '#1C2340',
+          900: '#141933'
         },
         black: {
           500: '#FFFFFF',

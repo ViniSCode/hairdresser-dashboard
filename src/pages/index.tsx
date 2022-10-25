@@ -1,17 +1,17 @@
 import type { NextPage } from 'next';
 import { signIn, useSession } from "next-auth/react";
 import { RiGoogleFill } from 'react-icons/ri';
-import { Header } from '../components/Header';
+import { PageTitle } from '../components/PageTitle';
 
 const Home: NextPage = () => {
   const {data: session} = useSession()
 
   return (
     <div className='max-w-[1120px] mx-auto px-4'>
-      <Header title='HairDashboard'/>
+      <PageTitle title='HairDashboard'/>
 
       <div className='flex items-center justify-center h-[75vh]'>
-        <div className='flex flex-col items-center justify-center gap-8 bg-gray-700 px-8 py-10 rounded-md'>
+        <div className='flex flex-col items-center justify-center gap-8 bg-gray-800 px-8 py-10 rounded-md'>
           { 
             !session ? (
             <>
