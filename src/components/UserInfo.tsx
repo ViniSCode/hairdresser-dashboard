@@ -13,7 +13,7 @@ export function UserInfo ({avatar, username, email}: UserInfoProps) {
         <span className="w-full truncate text-sm text-gray-500">{email}</span>
       </div>
 
-      <div className="max-w-[50px] w-full ml-4">
+      <div className="max-w-[50px] w-20 ml-4">
         <img src={avatar} alt="user avatar" referrerPolicy='no-referrer' className='mx-auto max-w-full rounded-full'/>
       </div>
     </div>

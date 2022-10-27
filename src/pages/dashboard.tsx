@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
-import { Appointments } from "../components/Appointments";
+import { Appointments } from "../components/Appoinments/Appointments";
 import { Header } from "../components/Header";
 import { Logo } from "../components/Logo";
 import { NavItems } from "../components/NavItems";
