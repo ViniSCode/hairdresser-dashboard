@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import { signIn, useSession } from "next-auth/react";
+import Link from 'next/link';
 import { RiGoogleFill } from 'react-icons/ri';
 import { PageTitle } from '../components/PageTitle';
 
@@ -25,7 +26,7 @@ const Home: NextPage = () => {
               <>
                 <img src={session.user!.image!} alt="user avatar" referrerPolicy='no-referrer' className='rounded-full w-20'/>
                 <span className='text-2xl font-bold text-center'>{session.user?.name}</span>
-                <a href="/dashboard" className='text-[18px] font-bold bg-blue-500 cursor-pointer transition-colors px-4 py-2 rounded-lg hover:bg-blue-800'>Go to dashboard</a>
+                <Link href="/dashboard" className='text-[18px] font-bold bg-blue-500 cursor-pointer transition-colors px-4 py-2 rounded-lg hover:bg-blue-800'>Go to dashboard</Link>
               </>
             )
           }
