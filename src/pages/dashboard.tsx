@@ -3,6 +3,7 @@ import { getSession } from "next-auth/react";
 import { Appointments } from "../components/Appointments/Index";
 import { Header } from "../components/Header";
 import { Logo } from "../components/Logo";
+import { MobileMenu } from "../components/Menu/MobileMenu";
 import { NavItems } from "../components/NavItems";
 
 export default function Dashboard () {
@@ -17,6 +18,7 @@ export default function Dashboard () {
         <div className="pr-4">
           <div className="flex items-center justify-between">
             <div className="lg:hidden">
+              <MobileMenu />
               <Logo title="Hairdashboard"/>
             </div>
             <Header />

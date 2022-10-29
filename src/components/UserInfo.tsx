@@ -1,4 +1,3 @@
-import Image from "next/image";
 
 interface UserInfoProps {
   avatar: string;
@@ -15,7 +14,7 @@ export function UserInfo ({avatar, username, email}: UserInfoProps) {
       </div>
 
       <div className="max-w-[40px] w-20 ml-4">
-        <Image src={avatar} alt="user avatar" referrerPolicy='no-referrer' className='mx-auto max-w-full rounded-full'/>
+        <img src={avatar} alt="user avatar" referrerPolicy='no-referrer' className='mx-auto max-w-full rounded-full'/>
       </div>
     </div>
   ) 

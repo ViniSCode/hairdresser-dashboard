@@ -51,7 +51,7 @@ export function Cards () {
       <motion.div drag="x"  dragConstraints={{right: 0, left: -(carouselW + 10)}} className='w-full h-full flex items-center justify-between px-4 gap-5 md:px-10 lg:gap-10'>
         {
           cards.map((card: any) => (
-            <motion.div key={card.id} className={`flex flex-col items-center justify-center gap-1 min-w-[180px] max-w-[180px] lg:w-full lg:max-w-[180px] bg-gray-800 px-8 py-3 rounded-2xl md:px-16 md:py-4 md:rounded-3xl ${card?.isSelected === true && 'bg-blue-500'}`}>
+            <motion.div key={card.id} className={`flex shadow flex-col items-center justify-center gap-1 min-w-[180px] max-w-[180px] lg:w-full lg:max-w-[180px] bg-gray-800 px-8 py-3 rounded-2xl md:px-16 md:py-4 md:rounded-3xl ${card?.isSelected === true && 'bg-blue-500'}`}>
               {card.html}
             </motion.div>
           ))

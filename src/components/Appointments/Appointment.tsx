@@ -6,8 +6,8 @@ export function Appointment () {
       <tr>
         <td className="px-5 py-5 text-sm">
           <div className="flex items-center">
-            <div className="max-w-[110px]">
-              <p className="truncate w-full text-white whitespace-no-wrap">
+            <div className="max-w-full w-full">
+              <p className="truncate w-full text-white">
                 Vera Carpenter
               </p>
             </div>

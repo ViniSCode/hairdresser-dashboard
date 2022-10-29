@@ -9,7 +9,7 @@ export function Appointments() {
       <Cards />
       
       <div className="mx-4 md:mx-10 mt-10 rounded-2xl bg-gray-800">
-        <div className="bg-gray-800 px-4 py-4 md:p-8 rounded-2xl w-full">
+        <div className="bg-gray-800 shadow px-4 py-4 md:p-8 rounded-2xl w-full">
             <TableActions />
           <div>
             <div className="-mx-4 sm:-mx-8 sm:px-8 pt-4 overflow-x-auto">
