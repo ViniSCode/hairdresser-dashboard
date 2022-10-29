@@ -15,7 +15,7 @@ export default function Dashboard () {
           <Logo title="Hairdashboard"/>
           <NavItems />
         </div>
-        <div className="pr-4">
+        <div>
           <div className="flex items-center justify-between">
             <div className="lg:hidden">
               <MobileMenu />
