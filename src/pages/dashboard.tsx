@@ -9,24 +9,37 @@ import { NavItems } from "../components/NavItems";
 export default function Dashboard () {
 
   return (
-    <div className="max-w-[1280px] p-4 mx-auto lg:p-0 lg:pb-10">
-      <div className="lg:grid lg:grid-cols-sidebar min-h-[100vh] gap-4">
-        <div className="hidden lg:block px-8">
-          <Logo title="Hairdashboard"/>
-          <NavItems />
-        </div>
-        <div>
-          <div className="flex items-center justify-between">
-            <div className="lg:hidden">
-              <MobileMenu />
-              <Logo title="Hairdashboard"/>
+    <>
+      <div className="hidden lg:block max-w-[1280px] mx-auto p-0 pb-10">
+        <div className="grid grid-cols-sidebar min-h-[100vh] gap-4">
+          <div className="block px-8">
+            <Logo title="Hairdashboard"/>
+            <NavItems />
+          </div>
+          <div>
+            <div className="flex items-center justify-between">
+              <Header />
             </div>
-            <Header />
+            <Appointments />
+          </div>
+        </div>
+      </div>
+
+      <div className="lg:hidden max-w-[1280px] px-4 pb-4 mx-auto">
+        <div className="min-h-[100vh] gap-4">
+          <div className="pb-20">
+            <div className="fixed w-full bg-gray-800 pb-4 pr-16">
+              <div className="flex items-center justify-between">
+                <Logo title="Hairdashboard" />
+                <MobileMenu />
+                <Header />
+              </div>
+            </div>
           </div>
           <Appointments />
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

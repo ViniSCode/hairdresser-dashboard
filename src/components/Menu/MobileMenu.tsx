@@ -47,7 +47,7 @@ export function MobileMenu () {
     <div className="lg:hidden select-none">
       <HiMenuAlt3
         size={26}
-        className="cursor-pointer ml-6 fixed top-10 md:top-[51px] left-0 right-0 bottom-0 z-[100] shadow-lg lg:hidden"
+        className="cursor-pointer ml-6 fixed top-6 md:top-[1.6rem] left-0 right-0 bottom-0 z-[100] shadow-lg lg:hidden"
         onClick={() => cycleOpen()}
       />
       <div

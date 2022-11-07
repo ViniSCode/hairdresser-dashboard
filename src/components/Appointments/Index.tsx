@@ -39,6 +39,11 @@ export function Appointments() {
                     <Appointment />
                     <Appointment />
                     <Appointment />
+                    <Appointment />
+                    <Appointment />
+                    <Appointment />
+                    <Appointment />
+                    <Appointment />
                   </tbody>
                 </table>
                 <TablePagination />
