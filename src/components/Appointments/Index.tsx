@@ -12,7 +12,7 @@ export function Appointments() {
         <div className="bg-gray-800 shadow px-4 py-4 md:p-8 rounded-2xl w-full">
             <TableActions />
           <div>
-            <div className="-mx-4 sm:-mx-8 sm:px-8 pt-4 overflow-x-auto">
+            <div className="-mx-4 sm:-mx-8 sm:px-8 pt-4 overflow-x-auto scrollbar-thin scrollbar-track-slate-500">
               <div className="inline-block min-w-full overflow-hidden">
                 <table className="min-w-full leading-normal">
                   <thead>
