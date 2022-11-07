@@ -28,7 +28,7 @@ export default function Dashboard () {
       <div className="lg:hidden max-w-[1280px] px-4 pb-4 mx-auto">
         <div className="min-h-[100vh] gap-4">
           <div className="pb-20">
-            <div className="fixed w-full bg-gray-800 pb-4 pr-16">
+            <div className="fixed w-full z-50 bg-gray-800 pb-4 pr-16">
               <div className="flex items-center justify-between">
                 <Logo title="Hairdashboard" />
                 <MobileMenu />
