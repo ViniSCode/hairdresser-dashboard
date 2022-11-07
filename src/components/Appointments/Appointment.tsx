@@ -24,7 +24,7 @@ export function Appointment () {
         </td>
         <td className="px-5 py-5 text-sm">
           <p className="text-white whitespace-no-wrap">
-            Hair Spa
+            Complete
           </p>
         </td>
         <td className="hidden md:inline-block px-5 py-5 text-sm">
