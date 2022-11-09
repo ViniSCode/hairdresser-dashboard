@@ -1,0 +1,11 @@
+query GetCustomersAppointments ($email: String!) {
+  appointments (where: {customer: {owner: {email: $email}}}) {
+    service
+    customerStatus
+    customer {
+      name,
+      number
+      id
+    }
+  }
+}

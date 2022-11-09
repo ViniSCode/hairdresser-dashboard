@@ -6,20 +6,28 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "@graphql-codegen/cli": "^2.13.11",
+    "@graphql-codegen/import-types-preset": "^2.2.6",
+    "@graphql-codegen/typescript": "^2.8.1",
+    "@graphql-codegen/typescript-operations": "^2.5.6",
     "framer-motion": "^7.6.1",
     "graphql": "^16.6.0",
     "next": "12.3.1",
     "next-auth": "^4.15.0",
+    "next-urql": "^4.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.6.0",
     "react-toastify": "^9.0.8",
-    "tailwind-scrollbar": "^2.0.1"
+    "tailwind-scrollbar": "^2.0.1",
+    "urql": "^3.0.3"
   },
   "devDependencies": {
+    "@graphql-codegen/typescript-urql": "^3.7.3",
     "@types/node": "18.11.4",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",

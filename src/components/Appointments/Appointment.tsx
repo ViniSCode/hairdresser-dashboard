@@ -1,14 +1,21 @@
 import { RiPencilLine } from "react-icons/ri";
 
-export function Appointment () { 
+interface AppointmentProps {
+  name: string;
+  status: boolean;
+  service: string;
+  number: number;
+}
+
+export function Appointment ({ name, status, service, number}: AppointmentProps) { 
   return (
     <>
       <tr>
         <td className="px-5 py-5 text-sm">
           <div className="flex items-center">
-            <div className="max-w-full w-full">
-              <p className="truncate w-full text-white">
-                Vera Carpenter
+            <div className="max-w-full md:max-w-[120px] w-full">
+              <p className="truncate w-full text-white max-w-full">
+                {name}
               </p>
             </div>
           </div>
@@ -17,19 +24,19 @@ export function Appointment () {
           <span className="relative inline-block px-3 py-1 font-semibold text-white leading-tight">
             <span
               aria-hidden
-              className="absolute inset-0 bg-green-500 opacity-50 rounded-full"
+              className={`absolute inset-0 bg-gray-500 opacity-50 rounded-full ${status ? 'bg-green-500' : 'bg-yellow-500'}`}
             ></span>
-            <span className="relative">Activo</span>
+            <span className="relative">{status ? 'complete' : 'confirmed'}</span>
           </span>
         </td>
         <td className="px-5 py-5 text-sm">
           <p className="text-white whitespace-no-wrap">
-            Complete
+            {service}
           </p>
         </td>
         <td className="hidden md:inline-block px-5 py-5 text-sm">
           <p className="text-white whitespace-no-wrap">
-            999999999
+            {number}
           </p>
         </td>
         <td className="px-5 py-5 text-sm">
