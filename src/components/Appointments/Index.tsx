@@ -32,7 +32,7 @@ export function Appointments({appointments}: AppointmentsProps) {
             { appointments.length > 0 ? (
               <div className="-mx-4 sm:-mx-8 sm:px-8 pt-4 overflow-x-auto scrollbar-thin scrollbar-track-slate-500">
                 <div className="inline-block min-w-full overflow-hidden">
-                  <table className="min-w-full leading-normal">
+                  <table className="w-full min-w-full leading-normal">
                     <thead>
                       <tr>
                         <th className="px-5 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">

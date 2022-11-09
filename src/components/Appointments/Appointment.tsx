@@ -12,12 +12,10 @@ export function Appointment ({ name, status, service, number}: AppointmentProps)
     <>
       <tr>
         <td className="px-5 py-5 text-sm">
-          <div className="flex items-center">
-            <div className="max-w-full md:max-w-[120px] w-full">
-              <p className="truncate w-full text-white max-w-full">
-                {name}
-              </p>
-            </div>
+          <div className="flex w-full max-w-[125px]">
+            <p className="flex-1 text-white truncate">
+              {name}
+            </p>
           </div>
         </td>
         <td className="hidden md:block px-5 py-5 text-sm">
