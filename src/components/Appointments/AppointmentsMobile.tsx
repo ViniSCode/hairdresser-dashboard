@@ -34,7 +34,7 @@ export function AppointmentsMobile({appointments}: AppointmentsProps) {
                   <div key={appointment.customer!.id} className="shadow flex items-start flex-col w-full bg-gray-800 rounded-lg p-4 max-w-full">
                     <div className="flex items-start w-full">
                       <p className="truncate flex-1">{appointment.customer!.name}</p>
-                      <span className="w-fit max-w-fit flex-1 text-sm bg-green-500 rounded-full px-2">complete</span>
+                      <span className={`w-fit max-w-fit flex-1 text-sm bg-gray-500 rounded-full px-2 text-white font-medium ${appointment.customerStatus ? 'bg-green-500' : 'bg-yellow-700'}`}>{appointment.customerStatus ? 'complete' : 'confirmed'}</span>
                     </div>
                     
                     <div className="flex items-start w-full">

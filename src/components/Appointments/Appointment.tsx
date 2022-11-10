@@ -10,10 +10,10 @@ interface AppointmentProps {
 export function Appointment ({ name, status, service, number}: AppointmentProps) { 
   return (
     <>
-      <tr>
-        <td className="px-5 py-5 text-sm">
-          <div className="flex w-full max-w-[125px]">
-            <p className="flex-1 text-white truncate">
+      <tr className="whitespace-nowrap">
+        <td className="px-5 py-5 text-sm overflow-hidden">
+          <div className="flex w-full overflow-hidden">
+            <p className="flex-1 text-white truncate max-w-[160px]">
               {name}
             </p>
           </div>
@@ -28,12 +28,12 @@ export function Appointment ({ name, status, service, number}: AppointmentProps)
           </span>
         </td>
         <td className="px-5 py-5 text-sm">
-          <p className="text-white whitespace-no-wrap">
+          <p className="text-white whitespace-no-wrap  max-w-[80px] truncate">
             {service}
           </p>
         </td>
         <td className="hidden md:inline-block px-5 py-5 text-sm">
-          <p className="text-white whitespace-no-wrap">
+          <p className="text-white whitespace-no-wrap max-w-[80px] truncate">
             {number}
           </p>
         </td>

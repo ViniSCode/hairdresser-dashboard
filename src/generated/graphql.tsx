@@ -36,6 +36,7 @@ export type Appointment = Node & {
   createdBy?: Maybe<User>;
   customer?: Maybe<Customer>;
   customerStatus: Scalars['Boolean'];
+  date: Scalars['Date'];
   /** Get the document in other stages */
   documentInStages: Array<Appointment>;
   /** List of Appointment versions */
@@ -122,6 +123,7 @@ export type AppointmentCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   customer?: InputMaybe<CustomerCreateOneInlineInput>;
   customerStatus: Scalars['Boolean'];
+  date: Scalars['Date'];
   service: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
@@ -179,6 +181,21 @@ export type AppointmentManyWhereInput = {
   customerStatus?: InputMaybe<Scalars['Boolean']>;
   /** All values that are not equal to given value. */
   customerStatus_not?: InputMaybe<Scalars['Boolean']>;
+  date?: InputMaybe<Scalars['Date']>;
+  /** All values greater than the given value. */
+  date_gt?: InputMaybe<Scalars['Date']>;
+  /** All values greater than or equal the given value. */
+  date_gte?: InputMaybe<Scalars['Date']>;
+  /** All values that are contained in given list. */
+  date_in?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  /** All values less than the given value. */
+  date_lt?: InputMaybe<Scalars['Date']>;
+  /** All values less than or equal the given value. */
+  date_lte?: InputMaybe<Scalars['Date']>;
+  /** All values that are not equal to given value. */
+  date_not?: InputMaybe<Scalars['Date']>;
+  /** All values that are not contained in given list. */
+  date_not_in?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
   documentInStages_every?: InputMaybe<AppointmentWhereStageInput>;
   documentInStages_none?: InputMaybe<AppointmentWhereStageInput>;
   documentInStages_some?: InputMaybe<AppointmentWhereStageInput>;
@@ -262,6 +279,8 @@ export enum AppointmentOrderByInput {
   CreatedAtDesc = 'createdAt_DESC',
   CustomerStatusAsc = 'customerStatus_ASC',
   CustomerStatusDesc = 'customerStatus_DESC',
+  DateAsc = 'date_ASC',
+  DateDesc = 'date_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
@@ -275,6 +294,7 @@ export enum AppointmentOrderByInput {
 export type AppointmentUpdateInput = {
   customer?: InputMaybe<CustomerUpdateOneInlineInput>;
   customerStatus?: InputMaybe<Scalars['Boolean']>;
+  date?: InputMaybe<Scalars['Date']>;
   service?: InputMaybe<Scalars['String']>;
 };
 
@@ -297,6 +317,7 @@ export type AppointmentUpdateManyInlineInput = {
 
 export type AppointmentUpdateManyInput = {
   customerStatus?: InputMaybe<Scalars['Boolean']>;
+  date?: InputMaybe<Scalars['Date']>;
   service?: InputMaybe<Scalars['String']>;
 };
 
@@ -379,6 +400,21 @@ export type AppointmentWhereInput = {
   customerStatus?: InputMaybe<Scalars['Boolean']>;
   /** All values that are not equal to given value. */
   customerStatus_not?: InputMaybe<Scalars['Boolean']>;
+  date?: InputMaybe<Scalars['Date']>;
+  /** All values greater than the given value. */
+  date_gt?: InputMaybe<Scalars['Date']>;
+  /** All values greater than or equal the given value. */
+  date_gte?: InputMaybe<Scalars['Date']>;
+  /** All values that are contained in given list. */
+  date_in?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  /** All values less than the given value. */
+  date_lt?: InputMaybe<Scalars['Date']>;
+  /** All values less than or equal the given value. */
+  date_lte?: InputMaybe<Scalars['Date']>;
+  /** All values that are not equal to given value. */
+  date_not?: InputMaybe<Scalars['Date']>;
+  /** All values that are not contained in given list. */
+  date_not_in?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
   documentInStages_every?: InputMaybe<AppointmentWhereStageInput>;
   documentInStages_none?: InputMaybe<AppointmentWhereStageInput>;
   documentInStages_some?: InputMaybe<AppointmentWhereStageInput>;
@@ -4791,10 +4827,11 @@ export enum _SystemDateTimeFieldVariation {
 
 export type GetCustomersAppointmentsQueryVariables = Exact<{
   email: Scalars['String'];
+  date?: InputMaybe<Scalars['Date']>;
 }>;
 
 
-export type GetCustomersAppointmentsQuery = { __typename?: 'Query', appointments: Array<{ __typename?: 'Appointment', service: string, customerStatus: boolean, customer?: { __typename?: 'Customer', name: string, number: number, id: string } | null }> };
+export type GetCustomersAppointmentsQuery = { __typename?: 'Query', appointments: Array<{ __typename?: 'Appointment', service: string, customerStatus: boolean, date: any, customer?: { __typename?: 'Customer', name: string, number: number, id: string } | null }>, todayAppointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } } };
 
 export type GetOwnerCustomersQueryVariables = Exact<{
   email: Scalars['String'];
@@ -4805,14 +4842,22 @@ export type GetOwnerCustomersQuery = { __typename?: 'Query', customers: Array<{ 
 
 
 export const GetCustomersAppointmentsDocument = gql`
-    query GetCustomersAppointments($email: String!) {
-  appointments(where: {customer: {owner: {email: $email}}}) {
+    query GetCustomersAppointments($email: String!, $date: Date) {
+  appointments(where: {date: $date, customer: {owner: {email: $email}}}) {
     service
     customerStatus
+    date
     customer {
       name
       number
       id
+    }
+  }
+  todayAppointments: appointmentsConnection(
+    where: {date: $date, customer: {owner: {email: $email}}}
+  ) {
+    aggregate {
+      count
     }
   }
 }

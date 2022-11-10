@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 import { AppointmentsLoading } from "../components/Appointments/AppointmentsLoading";
 import { AppointmentsLoadingMobile } from "../components/Appointments/AppointmentsLoadingMobile";
 import { AppointmentsMobile } from "../components/Appointments/AppointmentsMobile";
@@ -10,12 +11,19 @@ import { MobileMenu } from "../components/Menu/MobileMenu";
 import { NavItems } from "../components/NavItems";
 import { GetOwnerCustomersDocument, useGetCustomersAppointmentsQuery } from "../generated/graphql";
 import { client, ssrCache } from "../lib/urql";
+import { GetCurrentDate } from "../utils/GetCurrentDate";
 
 export default function Dashboard ({session}: any) {
+  const [date, setDate] = useState("");
 
+  useEffect(() => {
+    setDate(GetCurrentDate())
+  }, [])
+  
   const [{data}] = useGetCustomersAppointmentsQuery({
     variables: {
-      email: session.user.email
+      email: session.user.email,
+      date: date ? date : ''
     }
   })
 
@@ -23,7 +31,7 @@ export default function Dashboard ({session}: any) {
     <>
       <div className="hidden lg:block max-w-[1280px] mx-auto p-0 pb-10">
         <div className="grid grid-cols-sidebar min-h-[100vh] gap-4">
-          <div className="block px-8">
+          <div className="block px-4">
             <Logo title="Hairdashboard"/>
             <NavItems />
           </div>
@@ -56,6 +64,7 @@ export default function Dashboard ({session}: any) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context)
+  const date = new Date().toISOString().toString();
 
   if (!session) {
     return {
@@ -67,7 +76,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   await client
-  .query(GetOwnerCustomersDocument, { email: session.user?.email })
+  .query(GetOwnerCustomersDocument, { email: session.user?.email, date })
   .toPromise();
 
   
