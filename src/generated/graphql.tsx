@@ -4840,7 +4840,7 @@ export type GetOwnerCustomersQueryVariables = Exact<{
 }>;
 
 
-export type GetOwnerCustomersQuery = { __typename?: 'Query', customers: Array<{ __typename?: 'Customer', name: string, number: number }> };
+export type GetOwnerCustomersQuery = { __typename?: 'Query', customers: Array<{ __typename?: 'Customer', name: string, number: number, id: string }> };
 
 
 export const GetCustomersAppointmentsDocument = gql`
@@ -4895,6 +4895,7 @@ export const GetOwnerCustomersDocument = gql`
   customers(where: {owner: {email: $email}}) {
     name
     number
+    id
   }
 }
     `;

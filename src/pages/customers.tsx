@@ -42,7 +42,7 @@ export default function Customers ({session}: any) {
             </div>
               <div className="bg-gray-900 p-10 rounded-2xl w-full h-[70vh] flex flex-col gap-4">
                 { data?.customers && data.customers.map(customer => (
-                  <Customer customer={customer}/>
+                  <Customer customer={customer} key={customer.id}/>
                 ))
                 }
               </div>
