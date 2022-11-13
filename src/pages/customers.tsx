@@ -9,7 +9,7 @@ import { GetOwnerCustomersDocument, useGetOwnerCustomersQuery } from "../generat
 import { client, ssrCache } from "../lib/urql";
 import { GetCurrentDate } from "../utils/GetCurrentDate";
 
-export default function customers ({session}: any) {
+export default function Customers ({session}: any) {
   const [today, setToday] = useState("");
   const [tomorrow, setTomorrow] = useState("");
   const [weekly, setWeekly] = useState("");
