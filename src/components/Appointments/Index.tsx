@@ -1,35 +1,24 @@
+import { GetCustomersAppointmentsQuery } from "../../generated/graphql";
 import { Appointment } from "./Appointment";
 import { Cards } from "./Cards";
 import { TableActions } from "./TableActions";
 import { TablePagination } from "./TablePagination";
 
-type Appointment = {
-  __typename?: 'Appointment', 
-  service: string, 
-  customerStatus: boolean, 
-  customer?: { 
-    __typename?: 'Customer', 
-    name: string, 
-    number: number, 
-    id: string 
-  } | null
-}
-
 interface AppointmentsProps {
-  appointments: Appointment[]
+  data: GetCustomersAppointmentsQuery;
 }
 
-export function Appointments({appointments}: AppointmentsProps) {
+export function Appointments({data}: AppointmentsProps) {
 
   return (
     <div className="w-full rounded-2xl bg-gray-900 mt-4 py-10">
-      <Cards />
+      {data && <Cards card={data} />}
       
       <div className="mx-4 md:mx-10 mt-10 rounded-2xl bg-gray-800">
         <div className="bg-gray-800 shadow px-4 py-4 md:p-8 rounded-2xl w-full">
             <TableActions />
           <div>
-            { appointments.length > 0 ? (
+            { data.appointments.length > 0 ? (
               <div className="-mx-4 sm:-mx-8 sm:px-8 pt-4 overflow-x-auto scrollbar-thin scrollbar-track-slate-500">
                 <div className="inline-block min-w-full overflow-hidden">
                   <table className="w-full min-w-full leading-normal">
@@ -53,10 +42,10 @@ export function Appointments({appointments}: AppointmentsProps) {
                       </tr>
                     </thead>
                     <tbody>
-                      { appointments && appointments.map((appointment) => (
+                      { data.appointments && data.appointments.map((appointment) => (
                         (
                           <Appointment 
-                            key={appointment.customer!.id}
+                            key={appointment.id}
                             name={appointment.customer!.name}
                             status={appointment.customerStatus}
                             service={appointment.service}

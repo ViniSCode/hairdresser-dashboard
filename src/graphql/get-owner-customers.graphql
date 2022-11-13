@@ -1,5 +1,6 @@
 query GetOwnerCustomers ($email: String!) {
   customers (where: {owner: {email: $email}}) {
     name
+    number
   }
 }

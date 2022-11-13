@@ -4827,26 +4827,29 @@ export enum _SystemDateTimeFieldVariation {
 
 export type GetCustomersAppointmentsQueryVariables = Exact<{
   email: Scalars['String'];
-  date?: InputMaybe<Scalars['Date']>;
+  today?: InputMaybe<Scalars['Date']>;
+  tomorrow?: InputMaybe<Scalars['Date']>;
+  weekly?: InputMaybe<Scalars['Date']>;
 }>;
 
 
-export type GetCustomersAppointmentsQuery = { __typename?: 'Query', appointments: Array<{ __typename?: 'Appointment', service: string, customerStatus: boolean, date: any, customer?: { __typename?: 'Customer', name: string, number: number, id: string } | null }>, todayAppointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } } };
+export type GetCustomersAppointmentsQuery = { __typename?: 'Query', appointments: Array<{ __typename?: 'Appointment', service: string, customerStatus: boolean, date: any, id: string, customer?: { __typename?: 'Customer', name: string, number: number, id: string } | null }>, todayAppointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, tomorrowAppointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, completed: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, weekly: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } } };
 
 export type GetOwnerCustomersQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
 
 
-export type GetOwnerCustomersQuery = { __typename?: 'Query', customers: Array<{ __typename?: 'Customer', name: string }> };
+export type GetOwnerCustomersQuery = { __typename?: 'Query', customers: Array<{ __typename?: 'Customer', name: string, number: number }> };
 
 
 export const GetCustomersAppointmentsDocument = gql`
-    query GetCustomersAppointments($email: String!, $date: Date) {
-  appointments(where: {date: $date, customer: {owner: {email: $email}}}) {
+    query GetCustomersAppointments($email: String!, $today: Date, $tomorrow: Date, $weekly: Date) {
+  appointments(where: {date: $today, customer: {owner: {email: $email}}}) {
     service
     customerStatus
     date
+    id
     customer {
       name
       number
@@ -4854,7 +4857,28 @@ export const GetCustomersAppointmentsDocument = gql`
     }
   }
   todayAppointments: appointmentsConnection(
-    where: {date: $date, customer: {owner: {email: $email}}}
+    where: {date: $today, customer: {owner: {email: $email}}}
+  ) {
+    aggregate {
+      count
+    }
+  }
+  tomorrowAppointments: appointmentsConnection(
+    where: {date: $tomorrow, customer: {owner: {email: $email}}}
+  ) {
+    aggregate {
+      count
+    }
+  }
+  completed: appointmentsConnection(
+    where: {date: $today, customer: {owner: {email: $email}}, customerStatus: true}
+  ) {
+    aggregate {
+      count
+    }
+  }
+  weekly: appointmentsConnection(
+    where: {date_gt: $weekly, customer: {owner: {email: $email}}}
   ) {
     aggregate {
       count
@@ -4870,6 +4894,7 @@ export const GetOwnerCustomersDocument = gql`
     query GetOwnerCustomers($email: String!) {
   customers(where: {owner: {email: $email}}) {
     name
+    number
   }
 }
     `;

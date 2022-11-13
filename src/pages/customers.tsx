@@ -1,19 +1,15 @@
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { AppointmentsLoading } from "../components/Appointments/AppointmentsLoading";
-import { AppointmentsLoadingMobile } from "../components/Appointments/AppointmentsLoadingMobile";
-import { AppointmentsMobile } from "../components/Appointments/AppointmentsMobile";
-import { Appointments } from "../components/Appointments/Index";
 import { Header } from "../components/Header";
 import { Logo } from "../components/Logo";
 import { MobileMenu } from "../components/Menu/MobileMenu";
 import { NavItems } from "../components/NavItems";
-import { GetCustomersAppointmentsDocument, useGetCustomersAppointmentsQuery } from "../generated/graphql";
+import { GetOwnerCustomersDocument, useGetOwnerCustomersQuery } from "../generated/graphql";
 import { client, ssrCache } from "../lib/urql";
 import { GetCurrentDate } from "../utils/GetCurrentDate";
 
-export default function Dashboard ({session}: any) {
+export default function customers ({session}: any) {
   const [today, setToday] = useState("");
   const [tomorrow, setTomorrow] = useState("");
   const [weekly, setWeekly] = useState("");
@@ -25,12 +21,9 @@ export default function Dashboard ({session}: any) {
     setWeekly(weekly)
   }, [])
   
-  const [{data}] = useGetCustomersAppointmentsQuery({
+  const [{data}] = useGetOwnerCustomersQuery({
     variables: {
       email: session.user.email,
-      today: today ? today : '',
-      tomorrow: tomorrow ? tomorrow : '',
-      weekly: weekly ? weekly : '',
     }
   })
 
@@ -46,7 +39,6 @@ export default function Dashboard ({session}: any) {
             <div className="flex items-center justify-between">
               <Header />
             </div>
-            {!data ? <AppointmentsLoading/> : <Appointments data={data}/>}
           </div>
         </div>
       </div>
@@ -62,7 +54,6 @@ export default function Dashboard ({session}: any) {
               </div>
             </div>
           </div>
-          {!data ? <AppointmentsLoadingMobile/> : <AppointmentsMobile data={data}/>}
         </div>
       </div>
     </>
@@ -83,7 +74,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   await client
-  .query(GetCustomersAppointmentsDocument, { email: session.user?.email, today: date})
+  .query(GetOwnerCustomersDocument, { email: session.user?.email, today: date})
   .toPromise();
 
   

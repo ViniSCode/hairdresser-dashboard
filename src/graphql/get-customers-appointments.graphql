@@ -1,8 +1,9 @@
-query GetCustomersAppointments ($email: String!, $date: Date) {
-  appointments (where: {date: $date, customer: {owner: {email: $email}}}) {
+query GetCustomersAppointments ($email: String!, $today: Date, $tomorrow: Date, $weekly: Date) {
+  appointments (where: {date: $today, customer: {owner: {email: $email}}}) {
     service
     customerStatus
     date
+    id
     customer {
       name,
       number
@@ -10,7 +11,25 @@ query GetCustomersAppointments ($email: String!, $date: Date) {
     }
   }
   
-  todayAppointments: appointmentsConnection (where: {date: $date, customer: {owner: {email: $email}}}) {
+  todayAppointments: appointmentsConnection (where: {date: $today, customer: {owner: {email: $email}}}) {
+    aggregate {
+      count
+    }
+  }
+  
+  tomorrowAppointments: appointmentsConnection (where: {date: $tomorrow, customer: {owner: {email: $email}}}) {
+    aggregate {
+      count
+    }
+  }
+  
+  completed: appointmentsConnection (where: { date: $today, customer: {owner: {email: $email}}, customerStatus: true }) {
+    aggregate {
+      count
+    }
+  }
+  
+  weekly: appointmentsConnection (where: {date_gt: $weekly, customer: {owner: {email: $email}}}) {
     aggregate {
       count
     }
