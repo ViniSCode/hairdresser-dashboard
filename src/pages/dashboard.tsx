@@ -46,7 +46,7 @@ export default function Dashboard ({session}: any) {
             <div className="flex items-center justify-between">
               <Header />
             </div>
-            {!data ? <AppointmentsLoading/> : <Appointments data={data}/>}
+            {!data ? <AppointmentsLoading /> : <Appointments data={data}/>}
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@ import { BsCalendarCheck } from 'react-icons/bs';
 import { GetCustomersAppointmentsQuery } from '../../generated/graphql';
 
 interface CardProps {
-  card: GetCustomersAppointmentsQuery;
+  card?: GetCustomersAppointmentsQuery;
 }
 
 export function Cards ({card}: CardProps) {
