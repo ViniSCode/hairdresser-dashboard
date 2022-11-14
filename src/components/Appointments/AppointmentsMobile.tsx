@@ -1,13 +1,19 @@
 import { AiOutlineEdit } from 'react-icons/ai';
 import { GetCustomersAppointmentsQuery } from '../../generated/graphql';
+import { Pagination } from '../Pagination';
 import { Cards } from "./Cards";
 import { TableActions } from "./TableActions";
 
-interface AppointmentsProps {
+interface AppointmentsMobileProps {
   data: GetCustomersAppointmentsQuery;
+  setOffset: any;
+  setPage: any;
+  offset: any;
+  page: any;
+  productsPerPage: any;
 }
 
-export function AppointmentsMobile({data}: AppointmentsProps) {
+export function AppointmentsMobile({data, setOffset, setPage, offset, page, productsPerPage}: AppointmentsMobileProps) {
 
   return (
     <div className="w-full rounded-2xl bg-gray-900 mt-4 py-10">
@@ -44,6 +50,7 @@ export function AppointmentsMobile({data}: AppointmentsProps) {
               <span className="mt-10 block">No appointments yet...</span>
             )}
           </div>
+          <Pagination data={data} setOffset={setOffset} setPage={setPage} offset={offset} page={page} productsPerPage={productsPerPage}/>
         </div>
       </div>
     </div>

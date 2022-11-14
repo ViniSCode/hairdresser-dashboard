@@ -1,14 +1,19 @@
 import { GetCustomersAppointmentsQuery } from "../../generated/graphql";
+import { Pagination } from "../Pagination";
 import { Appointment } from "./Appointment";
 import { Cards } from "./Cards";
 import { TableActions } from "./TableActions";
-import { TablePagination } from "./TablePagination";
 
 interface AppointmentsProps {
   data: GetCustomersAppointmentsQuery;
+  setOffset: any;
+  setPage: any;
+  offset: any;
+  page: any;
+  productsPerPage: any;
 }
 
-export function Appointments({data}: AppointmentsProps) {
+export function Appointments({data, setOffset, setPage, offset, page, productsPerPage}: AppointmentsProps) {
 
   return (
     <div className="w-full rounded-2xl bg-gray-900 mt-4 py-10">
@@ -55,7 +60,7 @@ export function Appointments({data}: AppointmentsProps) {
                       )) }
                     </tbody>
                   </table>
-                  <TablePagination />
+                  <Pagination data={data} setOffset={setOffset} setPage={setPage} offset={offset} page={page} productsPerPage={productsPerPage}/>
                 </div>
               </div>
             ) : (

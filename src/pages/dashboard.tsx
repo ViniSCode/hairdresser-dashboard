@@ -17,6 +17,9 @@ export default function Dashboard ({session}: any) {
   const [today, setToday] = useState("");
   const [tomorrow, setTomorrow] = useState("");
   const [weekly, setWeekly] = useState("");
+  const [page, setPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(10);
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     const {today, tomorrow, weekly} = GetCurrentDate()
@@ -31,6 +34,8 @@ export default function Dashboard ({session}: any) {
       today: today ? today : '',
       tomorrow: tomorrow ? tomorrow : '',
       weekly: weekly ? weekly : '',
+      limit: productsPerPage,
+      offset,
     }
   })
 
@@ -46,7 +51,16 @@ export default function Dashboard ({session}: any) {
             <div className="flex items-center justify-between">
               <Header />
             </div>
-            {!data ? <AppointmentsLoading /> : <Appointments data={data}/>}
+            {!data ? <AppointmentsLoading /> : 
+              <Appointments 
+                data={data}
+                setOffset={setOffset}
+                setPage={setPage} 
+                offset={offset} 
+                page={page} 
+                productsPerPage={productsPerPage}
+              />
+            }
           </div>
         </div>
       </div>
@@ -62,7 +76,16 @@ export default function Dashboard ({session}: any) {
               </div>
             </div>
           </div>
-          {!data ? <AppointmentsLoadingMobile/> : <AppointmentsMobile data={data}/>}
+          {!data ? <AppointmentsLoadingMobile/> : 
+            <AppointmentsMobile 
+              data={data}
+              setOffset={setOffset}
+              setPage={setPage} 
+              offset={offset} 
+              page={page} 
+              productsPerPage={productsPerPage}
+            />
+          }
         </div>
       </div>
     </>
@@ -83,7 +106,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   await client
-  .query(GetCustomersAppointmentsDocument, { email: session.user?.email, today: date})
+  .query(GetCustomersAppointmentsDocument, { email: session.user?.email, today: date, limit: 10, offset: 0})
   .toPromise();
 
   

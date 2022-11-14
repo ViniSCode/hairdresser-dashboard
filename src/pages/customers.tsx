@@ -6,6 +6,7 @@ import { Header } from "../components/Header";
 import { Logo } from "../components/Logo";
 import { MobileMenu } from "../components/Menu/MobileMenu";
 import { NavItems } from "../components/NavItems";
+import { Pagination } from "../components/Pagination";
 import { GetOwnerCustomersDocument, useGetOwnerCustomersQuery } from "../generated/graphql";
 import { client, ssrCache } from "../lib/urql";
 import { GetCurrentDate } from "../utils/GetCurrentDate";
@@ -14,6 +15,9 @@ export default function Customers ({session}: any) {
   const [today, setToday] = useState("");
   const [tomorrow, setTomorrow] = useState("");
   const [weekly, setWeekly] = useState("");
+  const [page, setPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(10);
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     const {today, tomorrow, weekly} = GetCurrentDate()
@@ -25,6 +29,8 @@ export default function Customers ({session}: any) {
   const [{data}] = useGetOwnerCustomersQuery({
     variables: {
       email: session.user.email,
+      limit: productsPerPage,
+      offset: offset
     }
   })
 
@@ -40,11 +46,21 @@ export default function Customers ({session}: any) {
             <div className="flex items-center justify-between">
               <Header />
             </div>
-              <div className="bg-gray-900 p-10 rounded-2xl w-full h-[70vh] flex flex-col gap-4">
-                { data?.customers && data.customers.map(customer => (
-                  <Customer customer={customer} key={customer.id}/>
-                ))
-                }
+              <div className="bg-gray-900 p-10 rounded-2xl w-full h-[70vh] flex flex-col justify-between gap-4">
+                <div className="flex flex-col gap-4 w-full">
+                  { data?.customers && data.customers.length > 0 ? 
+                    (
+                      data.customers.map(customer => (
+                        <Customer customer={customer} key={customer.id}/>
+                      )) 
+                    )
+                      
+                    : (
+                      <span>No customers yet.</span>
+                    )
+                  }
+                </div>
+                { data && <Pagination data={data} setOffset={setOffset} setPage={setPage} offset={offset} page={page} productsPerPage={productsPerPage}/> }
               </div>
           </div>
         </div>
@@ -59,11 +75,14 @@ export default function Customers ({session}: any) {
                 <MobileMenu />
                 <Header />
               </div>
-              <div className="bg-gray-900 mt-6 py-6 px-4 rounded-2xl w-full mx-auto h-[70vh] flex flex-col items-center gap-4">
-                { data?.customers && data.customers.map(customer => (
+              <div className="bg-gray-900 mt-6 py-6 px-4 rounded-2xl w-full mx-auto h-[70vh] flex flex-col justify-between items-center gap-4">
+                <div className="flex flex-col gap-4 w-full">
+                  { data?.customers && data.customers.map(customer => (
                     <Customer customer={customer} key={customer.id}/>
-                  ))
-                }
+                    ))
+                  }
+                </div>
+                { data && <Pagination data={data} setOffset={setOffset} setPage={setPage} offset={offset} page={page} productsPerPage={productsPerPage}/> }
               </div>
             </div>
           </div>
@@ -87,7 +106,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   await client
-  .query(GetOwnerCustomersDocument, { email: session.user?.email, today: date})
+  .query(GetOwnerCustomersDocument, { email: session.user?.email, limit: 10, offset: 0})
   .toPromise();
 
   

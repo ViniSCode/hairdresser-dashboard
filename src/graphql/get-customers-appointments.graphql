@@ -1,5 +1,5 @@
-query GetCustomersAppointments ($email: String!, $today: Date, $tomorrow: Date, $weekly: Date) {
-  appointments (where: {date: $today, customer: {owner: {email: $email}}}) {
+query GetCustomersAppointments ($email: String!, $today: Date, $tomorrow: Date, $weekly: Date, $limit: Int!, $offset: Int!) {
+  appointments (where: {date: $today, customer: {owner: {email: $email}}}, first: $limit, skip: $offset) {
     service
     customerStatus
     date
@@ -8,6 +8,17 @@ query GetCustomersAppointments ($email: String!, $today: Date, $tomorrow: Date, 
       name,
       number
       id
+    }
+  }
+
+  pagination: appointmentsConnection (where: {date: $today, customer: {owner: {email: $email}}}, first: $limit, skip: $offset) {
+    aggregate {
+      count
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      pageSize
     }
   }
   

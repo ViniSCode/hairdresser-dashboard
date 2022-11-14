@@ -4830,22 +4830,30 @@ export type GetCustomersAppointmentsQueryVariables = Exact<{
   today?: InputMaybe<Scalars['Date']>;
   tomorrow?: InputMaybe<Scalars['Date']>;
   weekly?: InputMaybe<Scalars['Date']>;
+  limit: Scalars['Int'];
+  offset: Scalars['Int'];
 }>;
 
 
-export type GetCustomersAppointmentsQuery = { __typename?: 'Query', appointments: Array<{ __typename?: 'Appointment', service: string, customerStatus: boolean, date: any, id: string, customer?: { __typename?: 'Customer', name: string, number: number, id: string } | null }>, todayAppointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, tomorrowAppointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, completed: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, weekly: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } } };
+export type GetCustomersAppointmentsQuery = { __typename?: 'Query', appointments: Array<{ __typename?: 'Appointment', service: string, customerStatus: boolean, date: any, id: string, customer?: { __typename?: 'Customer', name: string, number: number, id: string } | null }>, pagination: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number }, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null } }, todayAppointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, tomorrowAppointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, completed: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, weekly: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } } };
 
 export type GetOwnerCustomersQueryVariables = Exact<{
   email: Scalars['String'];
+  limit: Scalars['Int'];
+  offset: Scalars['Int'];
 }>;
 
 
-export type GetOwnerCustomersQuery = { __typename?: 'Query', customers: Array<{ __typename?: 'Customer', name: string, number: number, id: string }> };
+export type GetOwnerCustomersQuery = { __typename?: 'Query', customers: Array<{ __typename?: 'Customer', name: string, number: number, id: string }>, pagination: { __typename?: 'CustomerConnection', aggregate: { __typename?: 'Aggregate', count: number }, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null } } };
 
 
 export const GetCustomersAppointmentsDocument = gql`
-    query GetCustomersAppointments($email: String!, $today: Date, $tomorrow: Date, $weekly: Date) {
-  appointments(where: {date: $today, customer: {owner: {email: $email}}}) {
+    query GetCustomersAppointments($email: String!, $today: Date, $tomorrow: Date, $weekly: Date, $limit: Int!, $offset: Int!) {
+  appointments(
+    where: {date: $today, customer: {owner: {email: $email}}}
+    first: $limit
+    skip: $offset
+  ) {
     service
     customerStatus
     date
@@ -4854,6 +4862,20 @@ export const GetCustomersAppointmentsDocument = gql`
       name
       number
       id
+    }
+  }
+  pagination: appointmentsConnection(
+    where: {date: $today, customer: {owner: {email: $email}}}
+    first: $limit
+    skip: $offset
+  ) {
+    aggregate {
+      count
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      pageSize
     }
   }
   todayAppointments: appointmentsConnection(
@@ -4891,11 +4913,25 @@ export function useGetCustomersAppointmentsQuery(options: Omit<Urql.UseQueryArgs
   return Urql.useQuery<GetCustomersAppointmentsQuery, GetCustomersAppointmentsQueryVariables>({ query: GetCustomersAppointmentsDocument, ...options });
 };
 export const GetOwnerCustomersDocument = gql`
-    query GetOwnerCustomers($email: String!) {
-  customers(where: {owner: {email: $email}}) {
+    query GetOwnerCustomers($email: String!, $limit: Int!, $offset: Int!) {
+  customers(where: {owner: {email: $email}}, first: $limit, skip: $offset) {
     name
     number
     id
+  }
+  pagination: customersConnection(
+    where: {owner: {email: $email}}
+    first: $limit
+    skip: $offset
+  ) {
+    aggregate {
+      count
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      pageSize
+    }
   }
 }
     `;

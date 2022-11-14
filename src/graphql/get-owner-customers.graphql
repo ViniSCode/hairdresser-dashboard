@@ -1,7 +1,18 @@
-query GetOwnerCustomers ($email: String!) {
-  customers (where: {owner: {email: $email}}) {
+query GetOwnerCustomers ($email: String!, $limit: Int!, $offset: Int!) {
+  customers (where: {owner: {email: $email}}, first: $limit, skip: $offset) {
     name
     number
     id
+  }
+  
+  pagination: customersConnection (where: {owner: {email: $email}}, first: $limit, skip: $offset) {
+      aggregate {
+      count
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      pageSize
+    }
   }
 }
