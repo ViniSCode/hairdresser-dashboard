@@ -4846,6 +4846,13 @@ export type GetOwnerCustomersQueryVariables = Exact<{
 
 export type GetOwnerCustomersQuery = { __typename?: 'Query', customers: Array<{ __typename?: 'Customer', name: string, number: number, id: string }>, pagination: { __typename?: 'CustomerConnection', aggregate: { __typename?: 'Aggregate', count: number }, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null } } };
 
+export type GetProfileStatsQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type GetProfileStatsQuery = { __typename?: 'Query', customers: { __typename?: 'CustomerConnection', aggregate: { __typename?: 'Aggregate', count: number } }, appointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } } };
+
 
 export const GetCustomersAppointmentsDocument = gql`
     query GetCustomersAppointments($email: String!, $today: Date, $tomorrow: Date, $weekly: Date, $limit: Int!, $offset: Int!) {
@@ -4938,4 +4945,24 @@ export const GetOwnerCustomersDocument = gql`
 
 export function useGetOwnerCustomersQuery(options: Omit<Urql.UseQueryArgs<GetOwnerCustomersQueryVariables>, 'query'>) {
   return Urql.useQuery<GetOwnerCustomersQuery, GetOwnerCustomersQueryVariables>({ query: GetOwnerCustomersDocument, ...options });
+};
+export const GetProfileStatsDocument = gql`
+    query GetProfileStats($email: String!) {
+  customers: customersConnection(where: {owner: {email: $email}}) {
+    aggregate {
+      count
+    }
+  }
+  appointments: appointmentsConnection(
+    where: {customer: {owner: {email: $email}}}
+  ) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+export function useGetProfileStatsQuery(options: Omit<Urql.UseQueryArgs<GetProfileStatsQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetProfileStatsQuery, GetProfileStatsQueryVariables>({ query: GetProfileStatsDocument, ...options });
 };

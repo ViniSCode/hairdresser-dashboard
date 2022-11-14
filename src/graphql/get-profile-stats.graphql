@@ -1,0 +1,12 @@
+query GetProfileStats ($email: String!) {
+  customers: customersConnection (where: {owner: {email: $email}}) {
+		aggregate {
+      count
+    }
+  }
+  appointments: appointmentsConnection (where: {customer: {owner: {email: $email}}}) {
+		aggregate {
+      count
+    }
+  }
+}

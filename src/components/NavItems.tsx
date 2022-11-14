@@ -30,7 +30,7 @@ export function NavItems () {
           <span className='text-md font-medium inline-block'>Stats</span>
         </div>
       </Link>
-      <Link href="">
+      <Link href="/profile">
         <div className='flex items-center gap-4 transition-colors hover:text-yellow-500 cursor-pointer'>
           <FiUser size={22}  />
           <span className='text-md font-medium inline-block'>Profile</span>
