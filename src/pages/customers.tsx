@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { FiPlus } from "react-icons/fi";
 import { Customer } from "../components/Customer";
 import { Header } from "../components/Header";
 import { Logo } from "../components/Logo";
@@ -46,7 +47,13 @@ export default function Customers ({session}: any) {
             <div className="flex items-center justify-between">
               <Header />
             </div>
-              <div className="bg-gray-900 p-10 rounded-2xl w-full h-[70vh] flex flex-col justify-between gap-4">
+              <div className="bg-gray-900 p-10 rounded-2xl w-full flex flex-col justify-between gap-4">
+                  <div className="pb-4 mt-2 mb-4 flex items-center justify-between">
+                    <span className="text-lg font-medium">Customers: {data?.customers.length}</span>
+                    <button className="hidden md:inline-block bg-blue-500 text-sm px-4 py-3 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+                        New Appointment
+                    </button>
+                  </div>
                 <div className="flex flex-col gap-4 w-full">
                   { data?.customers && data.customers.length > 0 ? 
                     (
@@ -56,7 +63,7 @@ export default function Customers ({session}: any) {
                     )
                       
                     : (
-                      <span>No customers yet.</span>
+                      <span className="text-lg font-medium text-gray-500 text-center mt-4 mb-4">No customers yet.</span>
                     )
                   }
                 </div>
@@ -75,11 +82,23 @@ export default function Customers ({session}: any) {
                 <MobileMenu />
                 <Header />
               </div>
-              <div className="bg-gray-900 mt-6 py-6 px-4 rounded-2xl w-full mx-auto h-[70vh] flex flex-col justify-between items-center gap-4">
+              <div className="bg-gray-900 mt-6 py-6 px-4 md:px-8 rounded-2xl w-full mx-auto min-w-h-[70vh] flex flex-col justify-between items-center gap-4">
                 <div className="flex flex-col gap-4 w-full">
-                  { data?.customers && data.customers.map(customer => (
+                  <div className="pb-4 mt-2 mb-4 flex items-center justify-between">
+                    <span className="text-lg font-medium">Customers: {data?.customers.length}</span>
+                    <button className="hidden md:inline-block bg-blue-500 text-sm px-4 py-3 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+                        New Appointment
+                    </button>
+                    <button className="inline-block md:hidden bg-blue-500 text-sm px-3 py-3 rounded-full text-white font-semibold tracking-wide cursor-pointer">
+                        <FiPlus size={22} className="text-white"/>
+                    </button>
+                  </div>
+                  { data?.customers && data?.customers.length > 0 ? (data.customers.map(customer => (
                     <Customer customer={customer} key={customer.id}/>
-                    ))
+                    )))
+                    : (
+                      <span className="text-lg font-medium text-gray-500 text-center mt-4 mb-4">No customers yet.</span>
+                    )
                   }
                 </div>
                 { data && <Pagination data={data} setOffset={setOffset} setPage={setPage} offset={offset} page={page} productsPerPage={productsPerPage}/> }

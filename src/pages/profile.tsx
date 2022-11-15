@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
+import { FiCalendar, FiLogOut, FiUsers } from "react-icons/fi";
 import { Header } from "../components/Header";
 import { Logo } from "../components/Logo";
 import { MobileMenu } from "../components/Menu/MobileMenu";
@@ -40,6 +41,20 @@ export default function Profile ({session}: any) {
                     <strong className="block text-gray-500">{session.user.email}</strong>
                   </div>
                 </div>
+                  <div className="mt-8 flex justify-center items-center gap-6">
+                      <span className="flex items-center gap-2 cursor-pointer hover:text-yellow-500 transition-colors">
+                        <FiCalendar size={22}  />
+                        Appointments
+                      </span>
+                      <span className="flex items-center gap-2 cursor-pointer hover:text-yellow-500 transition-colors">
+                      <FiUsers size={22}  />
+                        Customers
+                      </span>
+                      <span className="flex items-center gap-2 cursor-pointer hover:text-yellow-500 transition-colors">
+                        <FiLogOut size={22} />
+                        Logout
+                      </span>
+                  </div>
                   { data &&
                       <div className="mt-6 flex flex-col gap-2 w-full max-w-[400px] mx-auto">
                         <div className="bg-gray-800 rounded-lg w-full px-4 py-4 flex items-center justify-center gap-2">
@@ -91,6 +106,12 @@ export default function Profile ({session}: any) {
                           </div>  
                         </div>
                       }
+                      <div className="mt-8 gap-4 flex items-center justify-center">
+                        <span className="flex items-center gap-2 cursor-pointer hover:text-yellow-500 transition-colors">
+                          <FiLogOut size={22} />
+                          Logout
+                        </span>
+                      </div>
                   </div>
                 )
               }
