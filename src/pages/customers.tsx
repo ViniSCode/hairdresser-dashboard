@@ -47,7 +47,7 @@ export default function Customers ({session}: any) {
             <div className="flex items-center justify-between">
               <Header />
             </div>
-              <div className="bg-gray-900 p-10 rounded-2xl w-full flex flex-col justify-between gap-4">
+              <div className="bg-gray-900 p-10 rounded-2xl w-full flex flex-col min-h-[24rem] justify-between gap-4">
                   <div className="pb-4 mt-2 mb-4 flex items-center justify-between">
                     <span className="text-lg font-medium">Customers: {data?.customers.length}</span>
                     <button className="hidden md:inline-block bg-blue-500 text-sm px-4 py-3 rounded-md text-white font-semibold tracking-wide cursor-pointer">
