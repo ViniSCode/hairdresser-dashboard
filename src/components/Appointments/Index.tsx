@@ -64,7 +64,7 @@ export function Appointments({data, setOffset, setPage, offset, page, productsPe
                 </div>
               </div>
             ) : (
-              <span className="mt-10 block">No appointments yet...</span>
+              <span className="mt-10 block text-gray-500">No appointments yet...</span>
             )}
           </div>
         </div>

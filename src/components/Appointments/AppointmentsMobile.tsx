@@ -47,7 +47,7 @@ export function AppointmentsMobile({data, setOffset, setPage, offset, page, prod
                 ))}
               </div>
             ) : (
-              <span className="mt-10 block">No appointments yet...</span>
+              <span className="mt-10 text-center mb-8 block text-gray-500">No appointments yet...</span>
             )}
           </div>
           <Pagination data={data} setOffset={setOffset} setPage={setPage} offset={offset} page={page} productsPerPage={productsPerPage}/>
