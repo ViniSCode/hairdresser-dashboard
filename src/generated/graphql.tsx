@@ -4851,7 +4851,7 @@ export type GetProfileStatsQueryVariables = Exact<{
 }>;
 
 
-export type GetProfileStatsQuery = { __typename?: 'Query', customers: { __typename?: 'CustomerConnection', aggregate: { __typename?: 'Aggregate', count: number } }, appointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } } };
+export type GetProfileStatsQuery = { __typename?: 'Query', customers: { __typename?: 'CustomerConnection', aggregate: { __typename?: 'Aggregate', count: number } }, appointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, owner?: { __typename?: 'Owner', createdAt: any } | null };
 
 
 export const GetCustomersAppointmentsDocument = gql`
@@ -4959,6 +4959,9 @@ export const GetProfileStatsDocument = gql`
     aggregate {
       count
     }
+  }
+  owner(where: {email: $email}) {
+    createdAt
   }
 }
     `;

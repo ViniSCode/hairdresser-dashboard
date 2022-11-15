@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
-import { FiCalendar, FiLogOut, FiUsers } from "react-icons/fi";
+import { FiLogOut, FiUsers } from "react-icons/fi";
 import { Header } from "../components/Header";
 import { Logo } from "../components/Logo";
 import { MobileMenu } from "../components/Menu/MobileMenu";
@@ -15,8 +15,6 @@ export default function Profile ({session}: any) {
       email: session.user.email
     }
   })
-
-  console.log(data)
 
   return (
     <>
@@ -43,8 +41,7 @@ export default function Profile ({session}: any) {
                 </div>
                   <div className="mt-8 flex justify-center items-center gap-6">
                       <span className="flex items-center gap-2 cursor-pointer hover:text-yellow-500 transition-colors">
-                        <FiCalendar size={22}  />
-                        Appointments
+                        {data?.owner?.createdAt}
                       </span>
                       <span className="flex items-center gap-2 cursor-pointer hover:text-yellow-500 transition-colors">
                       <FiUsers size={22}  />
@@ -56,7 +53,7 @@ export default function Profile ({session}: any) {
                       </span>
                   </div>
                   { data &&
-                      <div className="mt-6 flex flex-col gap-2 w-full max-w-[400px] mx-auto">
+                      <div className="mt-10 flex flex-col gap-2 w-full max-w-[400px] mx-auto">
                         <div className="bg-gray-800 rounded-lg w-full px-4 py-4 flex items-center justify-center gap-2">
                           <strong className="text-lg">{data.customers.aggregate.count}</strong>
                           <strong className="text-lg">Customers</strong>

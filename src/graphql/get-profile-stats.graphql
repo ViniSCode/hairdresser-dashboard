@@ -9,4 +9,7 @@ query GetProfileStats ($email: String!) {
       count
     }
   }
+  owner (where: {email: $email}) {
+    createdAt
+  }
 }
