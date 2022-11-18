@@ -12,7 +12,7 @@ interface CustomerProps {
 
 export function Customer ({customer}: CustomerProps) {
   return (
-    <div className="w-full bg-gray-800 px-4 py-4 flex flex-col h-fit rounded-lg">
+    <div className="w-full bg-gray-800 lg:bg-gray-900 px-4 lg:px-0 py-4 flex flex-col h-fit rounded-lg lg:rounded-none lg:border-b lg:border-gray-500">
       <div className="flex-1 w-full flex justify-between">
         <span className="block font-medium truncate">{customer.name}</span>
         <div className="flex items-center gap-1 ml-2">

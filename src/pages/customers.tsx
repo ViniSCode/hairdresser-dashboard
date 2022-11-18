@@ -50,36 +50,38 @@ export default function Customers({ session }: any) {
             <div className="flex items-center justify-between">
               <Header />
             </div>
-            <div className="bg-gray-900 p-10 rounded-2xl w-full flex flex-col min-h-[24rem] justify-between gap-4">
-              <div className="pb-4 mt-2 mb-4 flex items-center justify-between">
-                <span className="text-lg font-medium">
-                  Customers: {data?.customers.length}
-                </span>
-                <button className="hidden md:inline-block bg-blue-500 text-sm px-4 py-3 rounded-md text-white font-semibold tracking-wide cursor-pointer">
-                  New Appointment
-                </button>
-              </div>
-              <div className="flex flex-col gap-4 w-full">
-                {data?.customers && data.customers.length > 0 ? (
-                  data.customers.map((customer) => (
-                    <Customer customer={customer} key={customer.id} />
-                  ))
-                ) : (
-                  <span className="text-lg font-medium text-gray-500 text-center mt-4 mb-4">
-                    No customers yet.
+            <div className="bg-gray-900 py-6 px-10 rounded-2xl w-full flex flex-col min-h-[24rem] justify-between gap-4">
+              <div className="bg-gray-800 rounded-2xl p-4">
+                <div className="pb-4 mt-2 mb-4 flex items-center justify-between max-w-[90%] mx-auto w-full">
+                  <span className="text-lg font-medium">
+                    Customers: {data?.customers.length}
                   </span>
+                  <button className="hidden md:inline-block bg-blue-500 text-sm px-4 py-3 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+                    New Appointment
+                  </button>
+                </div>
+                <div className="mb-5 flex flex-col gap-4 max-w-[90%] mx-auto w-full">
+                  {data?.customers && data.customers.length > 0 ? (
+                    data.customers.map((customer) => (
+                      <Customer customer={customer} key={customer.id} />
+                    ))
+                  ) : (
+                    <span className="text-lg font-medium text-gray-500 text-center mt-4 mb-4">
+                      No customers yet.
+                    </span>
+                  )}
+                </div>
+                {data && (
+                  <Pagination
+                    data={data}
+                    setOffset={setOffset}
+                    setPage={setPage}
+                    offset={offset}
+                    page={page}
+                    productsPerPage={productsPerPage}
+                  />
                 )}
               </div>
-              {data && (
-                <Pagination
-                  data={data}
-                  setOffset={setOffset}
-                  setPage={setPage}
-                  offset={offset}
-                  page={page}
-                  productsPerPage={productsPerPage}
-                />
-              )}
             </div>
           </div>
         </div>

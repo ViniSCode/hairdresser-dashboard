@@ -9,9 +9,10 @@ interface PaginationProps {
 
 
 export function Pagination ({data, setOffset, setPage, offset, page, productsPerPage}: PaginationProps) {
+  
   return (
     <div className="px-5 pt-5 flex flex-col xs:flex-row items-center xs:justify-between          ">
-      <span className="text-xs xs:text-sm text-gray-500">
+      <span className={`text-xs xs:text-sm text-gray-500 ${data?.pagination.aggregate.count <= 10 && 'opacity-30'}`}>
         {`Page ${page}`}
       </span>
       <div className="inline-flex mt-2 xs:mt-0">
