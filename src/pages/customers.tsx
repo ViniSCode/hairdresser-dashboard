@@ -73,8 +73,8 @@ export default function Customers ({session}: any) {
         </div>
       </div>
 
-      <div className="lg:hidden max-w-[1280px] px-4 pb-20 mx-auto">
-        <div className="pb-20 min-h-[100vh] gap-4">
+      <div className="lg:hidden max-w-[1280px] px-4 pb-4 mx-auto">
+        <div className="min-h-[100vh] gap-4">
           <div className="pb-20">
             <div className="fixed w-full z-50 bg-gray-800 pb-4 pr-8">
               <div className="flex items-center justify-between">
@@ -82,6 +82,7 @@ export default function Customers ({session}: any) {
                 <MobileMenu />
                 <Header />
               </div>
+            </div>
               <div className="bg-gray-900 mt-6 py-6 px-4 md:px-8 rounded-2xl w-full mx-auto min-w-h-[70vh] flex flex-col justify-between items-center gap-4">
                 <div className="flex flex-col gap-4 w-full">
                   <div className="pb-4 mt-2 mb-4 flex items-center justify-between">
@@ -103,7 +104,6 @@ export default function Customers ({session}: any) {
                 </div>
                 { data && <Pagination data={data} setOffset={setOffset} setPage={setPage} offset={offset} page={page} productsPerPage={productsPerPage}/> }
               </div>
-            </div>
           </div>
         </div>
       </div>
