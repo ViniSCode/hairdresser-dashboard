@@ -7,7 +7,6 @@ interface PaginationProps {
   productsPerPage: any
 }
 
-
 export function Pagination ({data, setOffset, setPage, offset, page, productsPerPage}: PaginationProps) {
   
   return (
