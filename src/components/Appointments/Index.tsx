@@ -13,17 +13,23 @@ interface AppointmentsProps {
   productsPerPage: any;
 }
 
-export function Appointments({data, setOffset, setPage, offset, page, productsPerPage}: AppointmentsProps) {
-
+export function Appointments({
+  data,
+  setOffset,
+  setPage,
+  offset,
+  page,
+  productsPerPage,
+}: AppointmentsProps) {
   return (
     <div className="w-full rounded-2xl bg-gray-900 mt-4 py-10">
       {data && <Cards card={data} />}
-      
+
       <div className="mx-4 md:mx-10 mt-10 rounded-2xl bg-gray-800">
         <div className="bg-gray-800 shadow px-4 py-4 md:p-8 rounded-2xl w-full">
-            <TableActions />
+          <TableActions />
           <div>
-            { data.appointments.length > 0 ? (
+            {data.appointments.length > 0 ? (
               <div className="-mx-4 sm:-mx-8 sm:px-8 pt-4 overflow-x-auto scrollbar-thin scrollbar-track-slate-500">
                 <div className="inline-block min-w-full overflow-hidden">
                   <table className="w-full min-w-full leading-normal">
@@ -47,24 +53,32 @@ export function Appointments({data, setOffset, setPage, offset, page, productsPe
                       </tr>
                     </thead>
                     <tbody>
-                      { data.appointments && data.appointments.map((appointment) => (
-                        (
-                          <Appointment 
+                      {data.appointments &&
+                        data.appointments.map((appointment) => (
+                          <Appointment
                             key={appointment.id}
                             name={appointment.customer!.name}
                             status={appointment.customerStatus}
                             service={appointment.service}
                             number={appointment.customer!.number}
                           />
-                        )
-                      )) }
+                        ))}
                     </tbody>
                   </table>
-                  <Pagination data={data} setOffset={setOffset} setPage={setPage} offset={offset} page={page} productsPerPage={productsPerPage}/>
+                  <Pagination
+                    data={data}
+                    setOffset={setOffset}
+                    setPage={setPage}
+                    offset={offset}
+                    page={page}
+                    productsPerPage={productsPerPage}
+                  />
                 </div>
               </div>
             ) : (
-              <span className="mt-10 block text-gray-500">No appointments yet...</span>
+              <span className="mt-10 block text-gray-500">
+                No appointments yet...
+              </span>
             )}
           </div>
         </div>
