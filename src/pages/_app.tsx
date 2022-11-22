@@ -1,12 +1,14 @@
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import type { AppProps } from 'next/app';
+import type { AppProps } from "next/app";
 import { Provider } from "urql";
 import { client, ssrCache } from "../lib/urql";
-import '../styles/globals.css';
+import "../styles/globals.css";
 
-function MyApp({ Component, pageProps }: AppProps<{session: Session; urqlState: any;}>) {
-
+function MyApp({
+  Component,
+  pageProps,
+}: AppProps<{ session: Session; urqlState: any }>) {
   if (pageProps.urqlState) {
     ssrCache.restoreData(pageProps.urqlState);
   }
@@ -17,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps<{session: Session; urqlState: 
         <Component {...pageProps} />
       </Provider>
     </SessionProvider>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;

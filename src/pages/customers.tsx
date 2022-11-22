@@ -110,30 +110,28 @@ export default function Customers({ session }: any) {
                 <FiPlus size={22} className="text-white" />
               </button>
             </div>
-              {data?.customers && data?.customers.length > 0 ? (
-                data.customers.map((customer) => (
-                  <Customer customer={customer} key={customer.id} />
-                ))
-              ) : (
-                <span className="text-lg font-medium text-gray-500 text-center mt-4 mb-4">
-                  No customers yet.
-                </span>
-              )}
-              {data && (
-                <Pagination
-                  data={data}
-                  setOffset={setOffset}
-                  setPage={setPage}
-                  offset={offset}
-                  page={page}
-                  productsPerPage={productsPerPage}
-                />
-              )}
-            </div>
+            {data?.customers && data?.customers.length > 0 ? (
+              data.customers.map((customer) => (
+                <Customer customer={customer} key={customer.id} />
+              ))
+            ) : (
+              <span className="text-lg font-medium text-gray-500 text-center mt-4 mb-4">
+                No customers yet.
+              </span>
+            )}
+            {data && (
+              <Pagination
+                data={data}
+                setOffset={setOffset}
+                setPage={setPage}
+                offset={offset}
+                page={page}
+                productsPerPage={productsPerPage}
+              />
+            )}
+          </div>
         </div>
       </div>
-
-
     </>
   );
 }

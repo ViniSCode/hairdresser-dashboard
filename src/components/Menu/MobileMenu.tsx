@@ -1,45 +1,54 @@
 import { AnimatePresence, motion, useCycle } from "framer-motion";
 import { useSession } from "next-auth/react";
-import { FiCalendar, FiLogOut, FiPieChart, FiUser, FiUsers } from 'react-icons/fi';
+import {
+  FiCalendar,
+  FiLogOut,
+  FiPieChart,
+  FiUser,
+  FiUsers
+} from "react-icons/fi";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { MobileMenuItems } from "./MobileMenuItems";
 
 const sideVariants = {
-closed: {
-  transition: {
-    opacity: 0,
-    staggerDirection: -1,
+  closed: {
+    transition: {
+      opacity: 0,
+      staggerDirection: -1,
+    },
   },
-},
-open: {
-  transition: {
-    staggerChildren: 0.1,
-    staggerDirection: 1,
+  open: {
+    transition: {
+      staggerChildren: 0.1,
+      staggerDirection: 1,
+    },
   },
-},
 };
 
 const aside = {
-open: {
-  width: 250,
-  opacity: 1,
-},
-closed: {
-  width: "0",
-  opacity: 0,
-},
+  open: {
+    width: 250,
+    opacity: 1,
+  },
+  closed: {
+    width: "0",
+    opacity: 0,
+  },
 };
 
-export function MobileMenu () {
-
+export function MobileMenu() {
   const [open, cycleOpen] = useCycle(false, true);
   const { data: session } = useSession();
 
   const menuItems = [
-    { icon: <FiCalendar size={22}  />, href: "/dashboard", name: "Appointments" },
-    { icon: <FiUsers size={22}  />, href: "/customers", name: "Customers" },
-    { icon: <FiPieChart size={22}  />, href: "/stats", name: "Stats" },
-    { icon: <FiUser size={22}  />, href: "/profile", name: "Profile" },
+    {
+      icon: <FiCalendar size={22} />,
+      href: "/dashboard",
+      name: "Appointments",
+    },
+    { icon: <FiUsers size={22} />, href: "/customers", name: "Customers" },
+    { icon: <FiPieChart size={22} />, href: "/stats", name: "Stats" },
+    { icon: <FiUser size={22} />, href: "/profile", name: "Profile" },
     { icon: <FiLogOut size={22} />, href: "/", name: "Logout" },
   ];
 
