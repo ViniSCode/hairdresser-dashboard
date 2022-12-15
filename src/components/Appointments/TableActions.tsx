@@ -1,6 +1,11 @@
 import { FiPlus } from "react-icons/fi";
 
-export function TableActions() {
+interface TableActionsProps {
+  setSearch: any;
+  search: any
+}
+
+export function TableActions({setSearch, search}: TableActionsProps) {
   return (
     <div className="flex items-center justify-between pb-3 lg:border-b lg:border-gray-500">
       <div className="flex items-center p-2 rounded-md">
@@ -19,9 +24,9 @@ export function TableActions() {
         <input
           className="outline-none bg-transparent ml-1 w-full block "
           type="text"
-          name=""
-          id=""
           placeholder="search..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
       <div className="lg:ml-40 space-x-8">

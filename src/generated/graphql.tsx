@@ -59,11 +59,13 @@ export type Appointment = Node & {
 
 
 export type AppointmentCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type AppointmentCustomerArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -83,6 +85,7 @@ export type AppointmentHistoryArgs = {
 
 
 export type AppointmentPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -91,6 +94,7 @@ export type AppointmentScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -99,6 +103,7 @@ export type AppointmentScheduledInArgs = {
 
 
 export type AppointmentUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -565,6 +570,7 @@ export type AssetCreatedAtArgs = {
 
 /** Asset system model */
 export type AssetCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -600,6 +606,7 @@ export type AssetPublishedAtArgs = {
 
 /** Asset system model */
 export type AssetPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -609,6 +616,7 @@ export type AssetScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -624,6 +632,7 @@ export type AssetUpdatedAtArgs = {
 
 /** Asset system model */
 export type AssetUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -1230,6 +1239,7 @@ export type CustomerAppointmentsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<AppointmentOrderByInput>;
@@ -1239,6 +1249,7 @@ export type CustomerAppointmentsArgs = {
 
 
 export type CustomerCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -1258,11 +1269,13 @@ export type CustomerHistoryArgs = {
 
 
 export type CustomerOwnerArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 export type CustomerPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -1271,6 +1284,7 @@ export type CustomerScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -1279,6 +1293,7 @@ export type CustomerScheduledInArgs = {
 
 
 export type CustomerUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -2546,6 +2561,7 @@ export type Owner = Node & {
 
 
 export type OwnerCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -2554,6 +2570,7 @@ export type OwnerCustomersArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<CustomerOrderByInput>;
@@ -2577,6 +2594,7 @@ export type OwnerHistoryArgs = {
 
 
 export type OwnerPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -2585,6 +2603,7 @@ export type OwnerScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -2593,6 +2612,7 @@ export type OwnerScheduledInArgs = {
 
 
 export type OwnerUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -3372,6 +3392,7 @@ export type ScheduledOperationAffectedDocumentsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -3380,6 +3401,7 @@ export type ScheduledOperationAffectedDocumentsArgs = {
 
 /** Scheduled Operation system model */
 export type ScheduledOperationCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -3394,18 +3416,21 @@ export type ScheduledOperationDocumentInStagesArgs = {
 
 /** Scheduled Operation system model */
 export type ScheduledOperationPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 /** Scheduled Operation system model */
 export type ScheduledOperationReleaseArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 /** Scheduled Operation system model */
 export type ScheduledOperationUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -3786,6 +3811,7 @@ export type ScheduledRelease = Node & {
 
 /** Scheduled Release system model */
 export type ScheduledReleaseCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -3803,6 +3829,7 @@ export type ScheduledReleaseOperationsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
   orderBy?: InputMaybe<ScheduledOperationOrderByInput>;
@@ -3813,12 +3840,14 @@ export type ScheduledReleaseOperationsArgs = {
 
 /** Scheduled Release system model */
 export type ScheduledReleasePublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
 /** Scheduled Release system model */
 export type ScheduledReleaseUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<Array<Locale>>;
 };
 
@@ -4826,6 +4855,7 @@ export enum _SystemDateTimeFieldVariation {
 }
 
 export type GetCustomersAppointmentsQueryVariables = Exact<{
+  search?: InputMaybe<Scalars['String']>;
   email: Scalars['String'];
   today?: InputMaybe<Scalars['Date']>;
   tomorrow?: InputMaybe<Scalars['Date']>;
@@ -4855,9 +4885,9 @@ export type GetProfileStatsQuery = { __typename?: 'Query', customers: { __typena
 
 
 export const GetCustomersAppointmentsDocument = gql`
-    query GetCustomersAppointments($email: String!, $today: Date, $tomorrow: Date, $weekly: Date, $limit: Int!, $offset: Int!) {
+    query GetCustomersAppointments($search: String, $email: String!, $today: Date, $tomorrow: Date, $weekly: Date, $limit: Int!, $offset: Int!) {
   appointments(
-    where: {date: $today, customer: {owner: {email: $email}}}
+    where: {date: $today, customer: {owner: {email: $email}, _search: $search}}
     first: $limit
     skip: $offset
   ) {
@@ -4872,7 +4902,7 @@ export const GetCustomersAppointmentsDocument = gql`
     }
   }
   pagination: appointmentsConnection(
-    where: {date: $today, customer: {owner: {email: $email}}}
+    where: {date: $today, customer: {owner: {email: $email}, _search: $search}}
     first: $limit
     skip: $offset
   ) {
@@ -4886,28 +4916,34 @@ export const GetCustomersAppointmentsDocument = gql`
     }
   }
   todayAppointments: appointmentsConnection(
-    where: {date: $today, customer: {owner: {email: $email}}}
+    where: {date: $today, customer: {owner: {email: $email}, _search: $search}}
+    first: $limit
+    skip: $offset
   ) {
     aggregate {
       count
     }
   }
   tomorrowAppointments: appointmentsConnection(
-    where: {date: $tomorrow, customer: {owner: {email: $email}}}
+    where: {date: $tomorrow, customer: {owner: {email: $email}, _search: $search}}
+    first: $limit
+    skip: $offset
   ) {
     aggregate {
       count
     }
   }
   completed: appointmentsConnection(
-    where: {date: $today, customer: {owner: {email: $email}}, customerStatus: true}
+    where: {date: $today, customer: {owner: {email: $email}, _search: $search}, customerStatus: true}
+    first: $limit
+    skip: $offset
   ) {
     aggregate {
       count
     }
   }
   weekly: appointmentsConnection(
-    where: {date_gt: $weekly, customer: {owner: {email: $email}}}
+    where: {date_gt: $weekly, customer: {owner: {email: $email}, _search: $search}}
   ) {
     aggregate {
       count

@@ -23,6 +23,8 @@ export default function Dashboard({ session }: any) {
   const [page, setPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(10);
   const [offset, setOffset] = useState(0);
+  const [search, setSearch] = useState("");
+  const [apiSearch, setApiSearch] = useState("");
 
   useEffect(() => {
     const { today, tomorrow, weekly } = GetCurrentDate();
@@ -30,6 +32,21 @@ export default function Dashboard({ session }: any) {
     setTomorrow(tomorrow);
     setWeekly(weekly);
   }, []);
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      if (search) {
+        setOffset(0)
+        setPage(1)
+        setApiSearch(search);
+      }
+    }, 800)
+    console.log(apiSearch)
+
+    return () => clearTimeout(timer);
+  }, [search])
+
+
 
   const [{ data }] = useGetCustomersAppointmentsQuery({
     variables: {
@@ -39,6 +56,7 @@ export default function Dashboard({ session }: any) {
       weekly: weekly ? weekly : "",
       limit: productsPerPage,
       offset,
+      search: apiSearch
     },
   });
 
@@ -58,6 +76,8 @@ export default function Dashboard({ session }: any) {
               <AppointmentsLoading />
             ) : (
               <Appointments
+                setSearch={setSearch}
+                search={search}
                 data={data}
                 setOffset={setOffset}
                 setPage={setPage}
@@ -69,7 +89,6 @@ export default function Dashboard({ session }: any) {
           </div>
         </div>
       </div>
-
       <div className="lg:hidden max-w-[1280px] px-4 pb-4 mx-auto">
         <div className="min-h-[100vh] gap-4">
           <div className="pb-20">
@@ -118,6 +137,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       today: date,
       limit: 10,
       offset: 0,
+      search: ""
     })
     .toPromise();
 

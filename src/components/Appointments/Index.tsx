@@ -11,6 +11,8 @@ interface AppointmentsProps {
   offset: any;
   page: any;
   productsPerPage: any;
+  setSearch: any;
+  search: any
 }
 
 export function Appointments({
@@ -20,6 +22,8 @@ export function Appointments({
   offset,
   page,
   productsPerPage,
+  setSearch,
+  search
 }: AppointmentsProps) {
   return (
     <div className="w-full rounded-2xl bg-gray-900 mt-4 py-10">
@@ -27,7 +31,7 @@ export function Appointments({
 
       <div className="mx-4 md:mx-10 mt-10 rounded-2xl bg-gray-800">
         <div className="bg-gray-800 shadow px-4 py-4 md:p-8 rounded-2xl w-full">
-          <TableActions />
+          <TableActions setSearch={setSearch} search={search}/>
           <div>
             {data.appointments.length > 0 ? (
               <div className="-mx-4 sm:-mx-8 sm:px-8 pt-4 overflow-x-auto scrollbar-thin scrollbar-track-slate-500">

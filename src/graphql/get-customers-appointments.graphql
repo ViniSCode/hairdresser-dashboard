@@ -1,5 +1,5 @@
-query GetCustomersAppointments ($email: String!, $today: Date, $tomorrow: Date, $weekly: Date, $limit: Int!, $offset: Int!) {
-  appointments (where: {date: $today, customer: {owner: {email: $email}}}, first: $limit, skip: $offset) {
+query GetCustomersAppointments ($search: String, $email: String!, $today: Date, $tomorrow: Date, $weekly: Date, $limit: Int!, $offset: Int!) {
+  appointments (where: {date: $today, customer: {owner: {email: $email}, _search: $search}}, first: $limit, skip: $offset) {
     service
     customerStatus
     date
@@ -11,7 +11,7 @@ query GetCustomersAppointments ($email: String!, $today: Date, $tomorrow: Date, 
     }
   }
 
-  pagination: appointmentsConnection (where: {date: $today, customer: {owner: {email: $email}}}, first: $limit, skip: $offset) {
+  pagination: appointmentsConnection (where: {date: $today, customer: {owner: {email: $email}, _search: $search}}, first: $limit, skip: $offset) {
     aggregate {
       count
     }
@@ -22,25 +22,25 @@ query GetCustomersAppointments ($email: String!, $today: Date, $tomorrow: Date, 
     }
   }
   
-  todayAppointments: appointmentsConnection (where: {date: $today, customer: {owner: {email: $email}}}) {
+  todayAppointments: appointmentsConnection (where: {date: $today, customer: {owner: {email: $email}, _search: $search}}, first: $limit, skip: $offset) {
     aggregate {
       count
     }
   }
   
-  tomorrowAppointments: appointmentsConnection (where: {date: $tomorrow, customer: {owner: {email: $email}}}) {
+  tomorrowAppointments: appointmentsConnection (where: {date: $tomorrow, customer: {owner: {email: $email}, _search: $search}}, first: $limit, skip: $offset) {
     aggregate {
       count
     }
   }
   
-  completed: appointmentsConnection (where: { date: $today, customer: {owner: {email: $email}}, customerStatus: true }) {
+  completed: appointmentsConnection (where: {date: $today, customer: {owner: {email: $email}, _search: $search}, customerStatus: true}, first: $limit, skip: $offset) {
     aggregate {
       count
     }
   }
   
-  weekly: appointmentsConnection (where: {date_gt: $weekly, customer: {owner: {email: $email}}}) {
+  weekly: appointmentsConnection (where: {date_gt: $weekly, customer: {owner: {email: $email}, _search: $search}}) {
     aggregate {
       count
     }
