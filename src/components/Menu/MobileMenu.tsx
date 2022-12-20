@@ -2,9 +2,7 @@ import { AnimatePresence, motion, useCycle } from "framer-motion";
 import { useSession } from "next-auth/react";
 import {
   FiCalendar,
-  FiLogOut,
-  FiPieChart,
-  FiUser,
+  FiLogOut, FiUser,
   FiUsers
 } from "react-icons/fi";
 import { HiMenuAlt3 } from "react-icons/hi";
@@ -47,7 +45,6 @@ export function MobileMenu() {
       name: "Appointments",
     },
     { icon: <FiUsers size={22} />, href: "/customers", name: "Customers" },
-    { icon: <FiPieChart size={22} />, href: "/stats", name: "Stats" },
     { icon: <FiUser size={22} />, href: "/profile", name: "Profile" },
     { icon: <FiLogOut size={22} />, href: "/", name: "Logout" },
   ];

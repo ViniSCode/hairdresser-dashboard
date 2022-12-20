@@ -2,9 +2,7 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import {
   FiCalendar,
-  FiLogOut,
-  FiPieChart,
-  FiUser,
+  FiLogOut, FiUser,
   FiUsers
 } from "react-icons/fi";
 export function NavItems() {
@@ -26,12 +24,6 @@ export function NavItems() {
         <div className="flex items-center gap-4 transition-colors hover:text-yellow-500 cursor-pointer">
           <FiUsers size={22} />
           <span className="text-md font-medium inline-block">Customers</span>
-        </div>
-      </Link>
-      <Link href="">
-        <div className="flex items-center gap-4 transition-colors hover:text-yellow-500 cursor-pointer">
-          <FiPieChart size={22} />
-          <span className="text-md font-medium inline-block">Stats</span>
         </div>
       </Link>
       <Link href="/profile">
