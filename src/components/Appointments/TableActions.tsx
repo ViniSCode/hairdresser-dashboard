@@ -1,8 +1,8 @@
 import { FiPlus } from "react-icons/fi";
 
 interface TableActionsProps {
-  setSearch: any;
-  search: any
+  setSearch?: any;
+  search?: any
 }
 
 export function TableActions({setSearch, search}: TableActionsProps) {

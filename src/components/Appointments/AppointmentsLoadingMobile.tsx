@@ -8,7 +8,7 @@ export function AppointmentsLoadingMobile() {
 
       <div className="mx-4 md:mx-10 mt-10 rounded-2xl">
         <div className="rounded-2xl w-full">
-          <TableActions search="" setSearch="" />
+          <TableActions />
           <div>
             <div
               role="status"

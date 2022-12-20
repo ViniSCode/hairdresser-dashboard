@@ -8,7 +8,7 @@ export function AppointmentsLoading() {
 
       <div className="mx-4 md:mx-10 mt-10 rounded-2xl bg-gray-800">
         <div className="bg-gray-800 shadow px-4 py-4 md:p-8 rounded-2xl w-full">
-          <TableActions />
+          <TableActions/>
           <div>
             <div className="mt-5 flex animate-pulse items-center justify-between max-w-[92%] mx-auto">
               <div className="h-2.5 bg-gray-500 rounded-full w-12"></div>
