@@ -12,7 +12,7 @@ interface AppointmentsProps {
   page: any;
   productsPerPage: any;
   setSearch: any;
-  search: any
+  search: any;
 }
 
 export function Appointments({

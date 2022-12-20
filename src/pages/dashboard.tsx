@@ -23,8 +23,10 @@ export default function Dashboard({ session }: any) {
   const [page, setPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(10);
   const [offset, setOffset] = useState(0);
+
   const [search, setSearch] = useState("");
   const [apiSearch, setApiSearch] = useState("");
+  const [searchLoading, setSearchLoading] = useState(false);
 
   useEffect(() => {
     const { today, tomorrow, weekly } = GetCurrentDate();
@@ -34,13 +36,12 @@ export default function Dashboard({ session }: any) {
   }, []);
 
   useEffect(() => {
+
     let timer = setTimeout(() => {
-      if (search) {
-        setOffset(0)
-        setPage(1)
-        setApiSearch(search);
-      }
-    }, 800)
+      setOffset(0)
+      setPage(1)
+      setApiSearch(search);
+    }, 500)
     console.log(apiSearch)
 
     return () => clearTimeout(timer);
