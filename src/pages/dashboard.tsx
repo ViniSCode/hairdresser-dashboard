@@ -13,13 +13,12 @@ import {
   GetCustomersAppointmentsDocument,
   useGetCustomersAppointmentsQuery
 } from "../generated/graphql";
+import { useFilter } from "../hooks/useFilter";
 import { client, ssrCache } from "../lib/urql";
 import { GetCurrentDate } from "../utils/GetCurrentDate";
 
 export default function Dashboard({ session }: any) {
-  const [today, setToday] = useState("");
-  const [tomorrow, setTomorrow] = useState("");
-  const [weekly, setWeekly] = useState("");
+  const {setToday, setTomorrow, setWeekly, today, tomorrow, weekly, selected, filterDate, setFilterDate} = useFilter();
   const [page, setPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(10);
   const [offset, setOffset] = useState(0);
@@ -29,14 +28,22 @@ export default function Dashboard({ session }: any) {
   const [searchLoading, setSearchLoading] = useState(false);
 
   useEffect(() => {
-    const { today, tomorrow, weekly } = GetCurrentDate();
-    setToday(today);
+    const { today, tomorrow, weekly, filterDate } = GetCurrentDate();
+  
+    if (selected === 1) {
+      setFilterDate(filterDate)
+    }
+    if (selected === 2) {
+      setFilterDate(tomorrow)
+    }
+
+    setToday(today)
     setTomorrow(tomorrow);
     setWeekly(weekly);
-  }, []);
+
+  }, [selected]);
 
   useEffect(() => {
-
     let timer = setTimeout(() => {
       setOffset(0)
       setPage(1)
@@ -47,11 +54,10 @@ export default function Dashboard({ session }: any) {
     return () => clearTimeout(timer);
   }, [search])
 
-
-
   const [{ data }] = useGetCustomersAppointmentsQuery({
     variables: {
       email: session.user.email,
+      filterDate: filterDate ? filterDate: "",
       today: today ? today : "",
       tomorrow: tomorrow ? tomorrow : "",
       weekly: weekly ? weekly : "",
@@ -135,7 +141,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   await client
     .query(GetCustomersAppointmentsDocument, {
       email: session.user?.email,
-      today: date,
+      filterDate: date,
       limit: 10,
       offset: 0,
       search: ""

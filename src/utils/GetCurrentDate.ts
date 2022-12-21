@@ -11,5 +11,6 @@ export function GetCurrentDate () {
     today,
     tomorrow: tomorrow.toISOString().toString(),
     weekly: weekly.toISOString().toString(),
+    filterDate: today,
   }
 }

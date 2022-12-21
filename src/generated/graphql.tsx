@@ -4857,6 +4857,7 @@ export enum _SystemDateTimeFieldVariation {
 export type GetCustomersAppointmentsQueryVariables = Exact<{
   search?: InputMaybe<Scalars['String']>;
   email: Scalars['String'];
+  filterDate?: InputMaybe<Scalars['Date']>;
   today?: InputMaybe<Scalars['Date']>;
   tomorrow?: InputMaybe<Scalars['Date']>;
   weekly?: InputMaybe<Scalars['Date']>;
@@ -4885,9 +4886,9 @@ export type GetProfileStatsQuery = { __typename?: 'Query', customers: { __typena
 
 
 export const GetCustomersAppointmentsDocument = gql`
-    query GetCustomersAppointments($search: String, $email: String!, $today: Date, $tomorrow: Date, $weekly: Date, $limit: Int!, $offset: Int!) {
+    query GetCustomersAppointments($search: String, $email: String!, $filterDate: Date, $today: Date, $tomorrow: Date, $weekly: Date, $limit: Int!, $offset: Int!) {
   appointments(
-    where: {date: $today, customer: {owner: {email: $email}, _search: $search}}
+    where: {date: $filterDate, customer: {owner: {email: $email}, _search: $search}}
     first: $limit
     skip: $offset
   ) {
@@ -4902,7 +4903,7 @@ export const GetCustomersAppointmentsDocument = gql`
     }
   }
   pagination: appointmentsConnection(
-    where: {date: $today, customer: {owner: {email: $email}, _search: $search}}
+    where: {date: $filterDate, customer: {owner: {email: $email}, _search: $search}}
     first: $limit
     skip: $offset
   ) {
