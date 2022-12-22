@@ -5,6 +5,7 @@ interface AppointmentProps {
   status: boolean;
   service: string;
   number: number;
+  id: string;
 }
 
 export function Appointment({
@@ -12,6 +13,7 @@ export function Appointment({
   status,
   service,
   number,
+  id,
 }: AppointmentProps) {
   return (
     <>
@@ -45,7 +47,7 @@ export function Appointment({
           </p>
         </td>
         <td className="px-5 py-5 text-sm">
-          <RiPencilLine size={22} className="text-gray-500" />
+          <RiPencilLine size={22} className="text-gray-500 cursor-pointer" />
         </td>
       </tr>
     </>

@@ -15,6 +15,8 @@ export const FilterContext = createContext({
   setFilterDate: (weekly: string) => {},
   selected: 1,
   setSelected: (selected: number) => {},
+  customerStatus: false,
+  setCustomerStatus: (customerStatus: boolean) => {},
 });
 
 export function FilterContextProvider ({children}: FilterContextProviderProps) {
@@ -23,9 +25,10 @@ export function FilterContextProvider ({children}: FilterContextProviderProps) {
   const [weekly, setWeekly] = useState("");
   const [filterDate, setFilterDate] = useState("");
   const [selected, setSelected] = useState(1);
+  const [customerStatus, setCustomerStatus] = useState(false);
 
   return (
-    <FilterContext.Provider value={{selected, setToday, setTomorrow, setSelected, setWeekly, today, tomorrow, weekly, filterDate, setFilterDate}}>
+    <FilterContext.Provider value={{selected, setToday, setTomorrow, setSelected, setWeekly, today, tomorrow, weekly, filterDate, setFilterDate, setCustomerStatus, customerStatus}}>
       {children}
     </FilterContext.Provider>
   )

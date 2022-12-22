@@ -65,6 +65,7 @@ export function Appointments({
                             status={appointment.customerStatus}
                             service={appointment.service}
                             number={appointment.customer!.number}
+                            id={appointment.customer!.id}
                           />
                         ))}
                     </tbody>

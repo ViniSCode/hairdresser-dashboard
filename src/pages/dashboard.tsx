@@ -18,23 +18,32 @@ import { client, ssrCache } from "../lib/urql";
 import { GetCurrentDate } from "../utils/GetCurrentDate";
 
 export default function Dashboard({ session }: any) {
-  const {setToday, setTomorrow, setWeekly, today, tomorrow, weekly, selected, filterDate, setFilterDate} = useFilter();
+  const {setToday, setTomorrow, setWeekly, today, tomorrow, weekly, selected, filterDate, setFilterDate, customerStatus, setCustomerStatus} = useFilter();
   const [page, setPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(10);
   const [offset, setOffset] = useState(0);
 
   const [search, setSearch] = useState("");
   const [apiSearch, setApiSearch] = useState("");
-  const [searchLoading, setSearchLoading] = useState(false);
 
   useEffect(() => {
     const { today, tomorrow, weekly, filterDate } = GetCurrentDate();
   
     if (selected === 1) {
       setFilterDate(filterDate)
+      setCustomerStatus(false)
     }
     if (selected === 2) {
       setFilterDate(tomorrow)
+      setCustomerStatus(false)    
+    }
+    if (selected === 3) {
+      setFilterDate(tomorrow)
+      setCustomerStatus(false)    
+    }
+    if (selected === 4) {
+      setFilterDate(filterDate)
+      setCustomerStatus(true)
     }
 
     setToday(today)
@@ -63,7 +72,9 @@ export default function Dashboard({ session }: any) {
       weekly: weekly ? weekly : "",
       limit: productsPerPage,
       offset,
-      search: apiSearch
+      search: apiSearch,
+      status: false,
+      filterStatus: customerStatus
     },
   });
 
@@ -144,7 +155,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       filterDate: date,
       limit: 10,
       offset: 0,
-      search: ""
+      search: "",
+      status: false,
+      filterStatus: false
     })
     .toPromise();
 

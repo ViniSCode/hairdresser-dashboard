@@ -4855,6 +4855,8 @@ export enum _SystemDateTimeFieldVariation {
 }
 
 export type GetCustomersAppointmentsQueryVariables = Exact<{
+  status: Scalars['Boolean'];
+  filterStatus: Scalars['Boolean'];
   search?: InputMaybe<Scalars['String']>;
   email: Scalars['String'];
   filterDate?: InputMaybe<Scalars['Date']>;
@@ -4886,9 +4888,9 @@ export type GetProfileStatsQuery = { __typename?: 'Query', customers: { __typena
 
 
 export const GetCustomersAppointmentsDocument = gql`
-    query GetCustomersAppointments($search: String, $email: String!, $filterDate: Date, $today: Date, $tomorrow: Date, $weekly: Date, $limit: Int!, $offset: Int!) {
+    query GetCustomersAppointments($status: Boolean!, $filterStatus: Boolean!, $search: String, $email: String!, $filterDate: Date, $today: Date, $tomorrow: Date, $weekly: Date, $limit: Int!, $offset: Int!) {
   appointments(
-    where: {date: $filterDate, customer: {owner: {email: $email}, _search: $search}}
+    where: {date: $filterDate, customerStatus: $filterStatus, customer: {owner: {email: $email}, _search: $search}}
     first: $limit
     skip: $offset
   ) {
@@ -4903,7 +4905,7 @@ export const GetCustomersAppointmentsDocument = gql`
     }
   }
   pagination: appointmentsConnection(
-    where: {date: $filterDate, customer: {owner: {email: $email}, _search: $search}}
+    where: {date: $filterDate, customerStatus: $filterStatus, customer: {owner: {email: $email}, _search: $search}}
     first: $limit
     skip: $offset
   ) {
@@ -4917,7 +4919,7 @@ export const GetCustomersAppointmentsDocument = gql`
     }
   }
   todayAppointments: appointmentsConnection(
-    where: {date: $today, customer: {owner: {email: $email}, _search: $search}}
+    where: {date: $today, customerStatus: $status, customer: {owner: {email: $email}, _search: $search}}
     first: $limit
     skip: $offset
   ) {
@@ -4926,7 +4928,7 @@ export const GetCustomersAppointmentsDocument = gql`
     }
   }
   tomorrowAppointments: appointmentsConnection(
-    where: {date: $tomorrow, customer: {owner: {email: $email}, _search: $search}}
+    where: {date: $tomorrow, customerStatus: $status, customer: {owner: {email: $email}, _search: $search}}
     first: $limit
     skip: $offset
   ) {
@@ -4944,7 +4946,7 @@ export const GetCustomersAppointmentsDocument = gql`
     }
   }
   weekly: appointmentsConnection(
-    where: {date_gt: $weekly, customer: {owner: {email: $email}, _search: $search}}
+    where: {date_gt: $weekly, customerStatus: $status, customer: {owner: {email: $email}, _search: $search}}
   ) {
     aggregate {
       count

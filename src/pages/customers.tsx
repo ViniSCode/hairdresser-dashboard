@@ -57,7 +57,7 @@ export default function Customers({ session }: any) {
                     Customers: {data?.customers.length}
                   </span>
                   <button className="hidden md:inline-block bg-blue-500 text-sm px-4 py-3 rounded-md text-white font-semibold tracking-wide cursor-pointer">
-                    New Appointment
+                    New Customer
                   </button>
                 </div>
                 <div className="mb-5 flex flex-col gap-4 max-w-[90%] mx-auto w-full">
@@ -104,7 +104,7 @@ export default function Customers({ session }: any) {
                 Customers: {data?.customers.length}
               </span>
               <button className="hidden md:inline-block bg-blue-500 text-sm px-4 py-3 rounded-md text-white font-semibold tracking-wide cursor-pointer">
-                New Appointment
+                New Customer
               </button>
               <button className="inline-block md:hidden bg-blue-500 text-sm px-3 py-3 rounded-full text-white font-semibold tracking-wide cursor-pointer">
                 <FiPlus size={22} className="text-white" />

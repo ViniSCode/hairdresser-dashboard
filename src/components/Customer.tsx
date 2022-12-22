@@ -4,6 +4,7 @@ type Customer = {
   __typename?: "Customer";
   name: string;
   number: number;
+  id: string;
 };
 
 interface CustomerProps {
