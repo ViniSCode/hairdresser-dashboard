@@ -1,4 +1,5 @@
 import { FiPlus } from "react-icons/fi";
+import { useModal } from "../../hooks/useModal";
 
 interface TableActionsProps {
   setSearch?: any;
@@ -6,6 +7,8 @@ interface TableActionsProps {
 }
 
 export function TableActions({setSearch, search}: TableActionsProps) {
+  const {openModal} = useModal();
+
   return (
     <div className="flex items-center justify-between pb-3 lg:border-b lg:border-gray-500">
       <div className="flex items-center p-2 rounded-md">
@@ -30,10 +33,10 @@ export function TableActions({setSearch, search}: TableActionsProps) {
         />
       </div>
       <div className="lg:ml-40 space-x-8">
-        <button className="hidden lg:inline-block bg-blue-500 text-sm px-4 py-3 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+        <button className="hidden lg:inline-block bg-blue-500 text-sm px-4 py-3 rounded-md text-white font-semibold tracking-wide cursor-pointer" onClick={() => openModal()}>
           New Appointment
         </button>
-        <button className="inline-block lg:hidden bg-blue-500 text-sm px-3 py-3 rounded-full text-white font-semibold tracking-wide cursor-pointer">
+        <button className="inline-block lg:hidden bg-blue-500 text-sm px-3 py-3 rounded-full text-white font-semibold tracking-wide cursor-pointer" onClick={() => openModal()}>
           <FiPlus size={22} className="text-white" />
         </button>
       </div>

@@ -1,4 +1,5 @@
 import { RiPencilLine } from "react-icons/ri";
+import { useModal } from "../../hooks/useModal";
 
 interface AppointmentProps {
   name: string;
@@ -15,6 +16,8 @@ export function Appointment({
   number,
   id,
 }: AppointmentProps) {
+  const {closeModal, openModal, isOpen} = useModal();
+
   return (
     <>
       <tr className="whitespace-nowrap">
@@ -47,7 +50,7 @@ export function Appointment({
           </p>
         </td>
         <td className="px-5 py-5 text-sm">
-          <RiPencilLine size={22} className="text-gray-500 cursor-pointer" />
+          <RiPencilLine size={22} className="text-gray-500 cursor-pointer"/>
         </td>
       </tr>
     </>

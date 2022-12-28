@@ -1,4 +1,4 @@
-query GetCustomersAppointments ($status: Boolean!, $filterStatus: Boolean!, $search: String, $email: String!, $filterDate: Date, $today: Date, $tomorrow: Date, $weekly: Date, $limit: Int!, $offset: Int!) {
+query GetCustomersAppointments ($status: Boolean!, $filterStatus: Boolean!, $search: String, $email: String!, $filterDate: Date, $today: Date, $tomorrow: Date, $limit: Int!, $offset: Int!) {
     appointments (where: {date: $filterDate, customerStatus: $filterStatus, customer: {owner: {email: $email}, _search: $search}}, first: $limit, skip: $offset) {
     service
     customerStatus
@@ -40,9 +40,29 @@ query GetCustomersAppointments ($status: Boolean!, $filterStatus: Boolean!, $sea
     }
   }
   
-  weekly: appointmentsConnection (where: {date_gt: $weekly, customerStatus: $status, customer: {owner: {email: $email}, _search: $search}}) {
+  all: appointmentsConnection (where: {customer: {owner: {email: $email}, _search: $search}},  first: $limit, skip: $offset, orderBy: createdAt_DESC) {
     aggregate {
       count
     }
+     
+    pageInfo {
+      hasNextPage,
+      hasPreviousPage,
+      pageSize
+    }
+    
+   	edges {
+    	node {
+    		 service
+        customerStatus
+        date
+        id
+        customer {
+          name,
+          number
+          id
+        }  
+    	}
+  	}
   }
 }

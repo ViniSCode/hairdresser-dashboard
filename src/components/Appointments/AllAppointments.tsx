@@ -7,7 +7,7 @@ import { Appointment } from "./Appointment";
 import { Cards } from "./Cards";
 import { TableActions } from "./TableActions";
 
-interface AppointmentsProps {
+interface AllAppointments {
   data: GetCustomersAppointmentsQuery;
   setOffset: any;
   setPage: any;
@@ -17,9 +17,10 @@ interface AppointmentsProps {
   setSearch: any;
   search: any;
   session: any;
+  isAllAppointmentsSelected?: boolean;
 }
 
-export function Appointments({
+export function AllAppointments({
   data,
   setOffset,
   setPage,
@@ -29,8 +30,10 @@ export function Appointments({
   setSearch,
   search,
   session,
-}: AppointmentsProps) {
+  isAllAppointmentsSelected
+}: AllAppointments) {
   const {closeModal, openModal, isOpen} = useModal();
+
 //   function handleCreateAppointment() {
 //   fetch('/api/mutations/appointments', {
 //     method: 'POST',
@@ -66,7 +69,7 @@ export function Appointments({
         <div className="bg-gray-800 shadow px-4 py-4 md:p-8 rounded-2xl w-full">
           <TableActions setSearch={setSearch} search={search}/>
           <div>
-            {data.appointments.length > 0 ? (
+            {data.all.edges.length > 0 ? (
               <div className="-mx-4 sm:-mx-8 sm:px-8 pt-4 overflow-x-auto scrollbar-thin scrollbar-track-slate-500">
                 <div className="inline-block min-w-full overflow-hidden">
                   <table className="w-full min-w-full leading-normal">
@@ -90,15 +93,15 @@ export function Appointments({
                       </tr>
                     </thead>
                     <tbody>
-                      {data.appointments &&
-                        data.appointments.map((appointment) => (
+                      {data.all &&
+                        data.all.edges.map((appointment) => (
                           <Appointment
-                            key={appointment.id}
-                            name={appointment.customer!.name}
-                            status={appointment.customerStatus}
-                            service={appointment.service}
-                            number={appointment.customer!.number}
-                            id={appointment.customer!.id}
+                            key={appointment.node.id}
+                            name={appointment.node.customer!.name}
+                            status={appointment.node.customerStatus}
+                            service={appointment.node.service}
+                            number={appointment.node.customer!.number}
+                            id={appointment.node.customer!.id}
                           />
                         ))}
                     </tbody>
@@ -110,6 +113,7 @@ export function Appointments({
                     offset={offset}
                     page={page}
                     productsPerPage={productsPerPage}
+                    isAll={isAllAppointmentsSelected}
                   />
                 </div>
               </div>

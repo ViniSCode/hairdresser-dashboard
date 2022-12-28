@@ -1,0 +1,19 @@
+query GetCustomerIfAlreadyExists ($search: String, $email: String!) {
+  customers (where: {_search: $search, owner: {email: $email}}) {
+ 		name,
+    id,
+    number
+  }
+
+  customerPagination: customersConnection (where: {_search: $search, owner: {email: $email}}, first: 5) {
+    aggregate {
+      count
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      pageSize
+    }
+  }
+  
+}

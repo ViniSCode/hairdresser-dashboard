@@ -15,20 +15,22 @@ interface AppointmentsMobileProps {
   page: any;
   productsPerPage: any;
   session: any;
+  isAllAppointmentsSelected?: boolean;
   setSearch: any;
   search: any;
 }
 
-export function AppointmentsMobile({
+export function AllAppointmentsMobile({
   data,
   setOffset,
   setPage,
   offset,
-  setSearch,
-  search,
   page,
   productsPerPage,
   session,
+  setSearch,
+  search,
+  isAllAppointmentsSelected
 }: AppointmentsMobileProps) {
   const {closeModal, openModal, isOpen} = useModal();
   return (
@@ -43,37 +45,37 @@ export function AppointmentsMobile({
         <div className="py-4 rounded-2xl w-full">
           <TableActions setSearch={setSearch} search={search}/>
           <div>
-            {data.appointments.length > 0 ? (
+            {data.all.edges.length > 0 ? (
               <div className="flex flex-wrap gap-2 items-center">
-                {data.appointments.map((appointment) => (
+                {data.all.edges.map((appointment) => (
                   <div
-                    key={appointment.id}
+                    key={appointment.node.id}
                     className="shadow flex items-start flex-col w-full bg-gray-800 rounded-lg p-4 max-w-full"
                   >
                     <div className="flex items-start w-full">
                       <p className="truncate flex-1">
-                        {appointment.customer!.name}
+                        {appointment.node.customer!.name}
                       </p>
                       <span
                         className={`w-fit max-w-fit flex-1 text-sm bg-gray-500 rounded-full px-2 text-white font-medium ${
-                          appointment.customerStatus
+                          appointment.node.customerStatus
                             ? "bg-green-500"
                             : "bg-yellow-700"
                         }`}
                       >
-                        {appointment.customerStatus ? "complete" : "confirmed"}
+                        {appointment.node.customerStatus ? "complete" : "confirmed"}
                       </span>
                     </div>
 
                     <div className="flex items-start w-full">
                       <p className="truncate flex-1 text-sm mt-1 text-gray-400 font-medium">
-                        {appointment.service}
+                        {appointment.node.service}
                       </p>
                     </div>
 
                     <div className="flex items-start w-full">
                       <p className="truncate flex-1 text-sm mt-1 text-gray-400 font-medium">
-                        {appointment.customer!.number}
+                        {appointment.node.customer!.number}
                       </p>
                       <div className="w-fit max-w-fit flex-1 cursor-pointer flex items-center gap-1">
                         <p className="truncate flex-1 text-sm text-gray-500 font-medium cursor-pointer">
@@ -98,6 +100,7 @@ export function AppointmentsMobile({
             offset={offset}
             page={page}
             productsPerPage={productsPerPage}
+            isAll
           />
         </div>
       </div>

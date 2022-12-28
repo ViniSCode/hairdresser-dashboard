@@ -7,6 +7,7 @@ interface PaginationProps {
   offset: any;
   page: any;
   productsPerPage: any;
+  isAll?: boolean;
 }
 
 export function Pagination({
@@ -16,13 +17,14 @@ export function Pagination({
   offset,
   page,
   productsPerPage,
+  isAll
 }: PaginationProps) {
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
-  let nextPage = data?.pagination.pageInfo.hasNextPage
-  let previousPage = data?.pagination.pageInfo.hasPreviousPage
-
+  let nextPage = !isAll ? data?.pagination.pageInfo.hasNextPage : data?.all.pageInfo.hasNextPage
+  let previousPage = !isAll ? data?.pagination.pageInfo.hasPreviousPage : data?.all.pageInfo.hasPreviousPage
+  let count = !isAll ? data?.pagination.aggregate.count : data?.all.aggregate.count
   
   const handlePreviousPage = () => {
     setIsButtonDisabled(true);
@@ -56,7 +58,7 @@ export function Pagination({
     <div className="px-5 pt-5 flex flex-col xs:flex-row items-center xs:justify-between          ">
       <span
         className={`text-xs xs:text-sm text-gray-500 ${
-          data?.pagination.aggregate.count <= 10 && "opacity-30"
+          count <= 10 && "opacity-30"
         }`}
       >
         {`Page ${page}`}

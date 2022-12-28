@@ -3,9 +3,11 @@ import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { RiGoogleFill } from "react-icons/ri";
 import { PageTitle } from "../components/PageTitle";
+import { useModal } from "../hooks/useModal";
 
 const Home: NextPage = () => {
   const { data: session } = useSession();
+  const {closeModal, openModal, isOpen} = useModal();
 
   return (
     <div className="max-w-[1120px] mx-auto px-4">

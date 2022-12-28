@@ -47,9 +47,9 @@ export function Cards({ card }: CardProps) {
         <div  className="w-full h-full flex flex-col items-center">
           <BsCalendarCheck size={30} className={`${selected === 3 ? "text-white" : 'text-purple-400'}`}  />
           <span className="mt-2 text-[32px] lg:text-[40px] text-white">
-            {card ? card.weekly.aggregate.count : "0"}
+            {card ? card.all.aggregate.count : "0"}
           </span>
-          <span className={`font-bold ${selected === 3 ? 'text-white' : 'text-gray-500'}`}>Weekly</span>
+          <span className={`font-bold ${selected === 3 ? 'text-white' : 'text-gray-500'}`}>All</span>
         </div>
       ),
       isSelected: selected === 3 ? true : false

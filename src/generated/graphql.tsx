@@ -4862,13 +4862,20 @@ export type GetCustomersAppointmentsQueryVariables = Exact<{
   filterDate?: InputMaybe<Scalars['Date']>;
   today?: InputMaybe<Scalars['Date']>;
   tomorrow?: InputMaybe<Scalars['Date']>;
-  weekly?: InputMaybe<Scalars['Date']>;
   limit: Scalars['Int'];
   offset: Scalars['Int'];
 }>;
 
 
-export type GetCustomersAppointmentsQuery = { __typename?: 'Query', appointments: Array<{ __typename?: 'Appointment', service: string, customerStatus: boolean, date: any, id: string, customer?: { __typename?: 'Customer', name: string, number: number, id: string } | null }>, pagination: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number }, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null } }, todayAppointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, tomorrowAppointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, completed: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, weekly: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } } };
+export type GetCustomersAppointmentsQuery = { __typename?: 'Query', appointments: Array<{ __typename?: 'Appointment', service: string, customerStatus: boolean, date: any, id: string, customer?: { __typename?: 'Customer', name: string, number: number, id: string } | null }>, pagination: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number }, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null } }, todayAppointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, tomorrowAppointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, completed: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, all: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number }, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null }, edges: Array<{ __typename?: 'AppointmentEdge', node: { __typename?: 'Appointment', service: string, customerStatus: boolean, date: any, id: string, customer?: { __typename?: 'Customer', name: string, number: number, id: string } | null } }> } };
+
+export type GetCustomerIfAlreadyExistsQueryVariables = Exact<{
+  search?: InputMaybe<Scalars['String']>;
+  email: Scalars['String'];
+}>;
+
+
+export type GetCustomerIfAlreadyExistsQuery = { __typename?: 'Query', customers: Array<{ __typename?: 'Customer', name: string, id: string, number: number }>, customerPagination: { __typename?: 'CustomerConnection', aggregate: { __typename?: 'Aggregate', count: number }, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null } } };
 
 export type GetOwnerCustomersQueryVariables = Exact<{
   email: Scalars['String'];
@@ -4888,7 +4895,7 @@ export type GetProfileStatsQuery = { __typename?: 'Query', customers: { __typena
 
 
 export const GetCustomersAppointmentsDocument = gql`
-    query GetCustomersAppointments($status: Boolean!, $filterStatus: Boolean!, $search: String, $email: String!, $filterDate: Date, $today: Date, $tomorrow: Date, $weekly: Date, $limit: Int!, $offset: Int!) {
+    query GetCustomersAppointments($status: Boolean!, $filterStatus: Boolean!, $search: String, $email: String!, $filterDate: Date, $today: Date, $tomorrow: Date, $limit: Int!, $offset: Int!) {
   appointments(
     where: {date: $filterDate, customerStatus: $filterStatus, customer: {owner: {email: $email}, _search: $search}}
     first: $limit
@@ -4945,11 +4952,32 @@ export const GetCustomersAppointmentsDocument = gql`
       count
     }
   }
-  weekly: appointmentsConnection(
-    where: {date_gt: $weekly, customerStatus: $status, customer: {owner: {email: $email}, _search: $search}}
+  all: appointmentsConnection(
+    where: {customer: {owner: {email: $email}, _search: $search}}
+    first: $limit
+    skip: $offset
+    orderBy: createdAt_DESC
   ) {
     aggregate {
       count
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      pageSize
+    }
+    edges {
+      node {
+        service
+        customerStatus
+        date
+        id
+        customer {
+          name
+          number
+          id
+        }
+      }
     }
   }
 }
@@ -4957,6 +4985,32 @@ export const GetCustomersAppointmentsDocument = gql`
 
 export function useGetCustomersAppointmentsQuery(options: Omit<Urql.UseQueryArgs<GetCustomersAppointmentsQueryVariables>, 'query'>) {
   return Urql.useQuery<GetCustomersAppointmentsQuery, GetCustomersAppointmentsQueryVariables>({ query: GetCustomersAppointmentsDocument, ...options });
+};
+export const GetCustomerIfAlreadyExistsDocument = gql`
+    query GetCustomerIfAlreadyExists($search: String, $email: String!) {
+  customers(where: {_search: $search, owner: {email: $email}}) {
+    name
+    id
+    number
+  }
+  customerPagination: customersConnection(
+    where: {_search: $search, owner: {email: $email}}
+    first: 5
+  ) {
+    aggregate {
+      count
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      pageSize
+    }
+  }
+}
+    `;
+
+export function useGetCustomerIfAlreadyExistsQuery(options: Omit<Urql.UseQueryArgs<GetCustomerIfAlreadyExistsQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetCustomerIfAlreadyExistsQuery, GetCustomerIfAlreadyExistsQueryVariables>({ query: GetCustomerIfAlreadyExistsDocument, ...options });
 };
 export const GetOwnerCustomersDocument = gql`
     query GetOwnerCustomers($email: String!, $limit: Int!, $offset: Int!) {
