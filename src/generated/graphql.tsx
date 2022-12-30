@@ -4908,6 +4908,13 @@ export type GetProfileStatsQueryVariables = Exact<{
 
 export type GetProfileStatsQuery = { __typename?: 'Query', customers: { __typename?: 'CustomerConnection', aggregate: { __typename?: 'Aggregate', count: number } }, appointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, owner?: { __typename?: 'Owner', createdAt: any } | null };
 
+export type OwnerAlreadyExistsQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type OwnerAlreadyExistsQuery = { __typename?: 'Query', owner?: { __typename?: 'Owner', id: string, email: string } | null };
+
 
 export const GetAppointmentDocument = gql`
     query GetAppointment($id: ID!) {
@@ -5098,4 +5105,16 @@ export const GetProfileStatsDocument = gql`
 
 export function useGetProfileStatsQuery(options: Omit<Urql.UseQueryArgs<GetProfileStatsQueryVariables>, 'query'>) {
   return Urql.useQuery<GetProfileStatsQuery, GetProfileStatsQueryVariables>({ query: GetProfileStatsDocument, ...options });
+};
+export const OwnerAlreadyExistsDocument = gql`
+    query OwnerAlreadyExists($email: String!) {
+  owner(where: {email: $email}) {
+    id
+    email
+  }
+}
+    `;
+
+export function useOwnerAlreadyExistsQuery(options: Omit<Urql.UseQueryArgs<OwnerAlreadyExistsQueryVariables>, 'query'>) {
+  return Urql.useQuery<OwnerAlreadyExistsQuery, OwnerAlreadyExistsQueryVariables>({ query: OwnerAlreadyExistsDocument, ...options });
 };

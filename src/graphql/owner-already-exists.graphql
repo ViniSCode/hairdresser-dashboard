@@ -1,0 +1,6 @@
+query OwnerAlreadyExists ($email: String!) {
+  owner(where: {email: $email}) {
+		id,
+    email,
+  }
+}
