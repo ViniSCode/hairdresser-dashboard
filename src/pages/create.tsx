@@ -87,7 +87,6 @@ export default function Modal ({handleClose, session}: any) {
       .catch((error) => {
         // Handle error
         console.log(error)
-        console.log(error)
       });    
   }
   

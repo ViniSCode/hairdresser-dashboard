@@ -100,7 +100,6 @@ async function publishAppointment (createdAppointmentId: any, createdUserId: any
 
     const data = await response.json();
 
-    console.log(data)
   } catch (error) {
     console.error('Error publishing appointment:', error);
     throw new Error("Error publishing appointment")
