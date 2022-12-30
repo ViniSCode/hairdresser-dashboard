@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { FiPlus } from "react-icons/fi";
 import { useModal } from "../../hooks/useModal";
 
@@ -33,12 +34,16 @@ export function TableActions({setSearch, search}: TableActionsProps) {
         />
       </div>
       <div className="lg:ml-40 space-x-8">
-        <button className="hidden lg:inline-block bg-blue-500 text-sm px-4 py-3 rounded-md text-white font-semibold tracking-wide cursor-pointer" onClick={() => openModal()}>
-          New Appointment
-        </button>
-        <button className="inline-block lg:hidden bg-blue-500 text-sm px-3 py-3 rounded-full text-white font-semibold tracking-wide cursor-pointer" onClick={() => openModal()}>
-          <FiPlus size={22} className="text-white" />
-        </button>
+        <Link href="/create">
+          <button  className="hidden lg:inline-block bg-blue-500 text-sm px-4 py-3 rounded-md text-white font-semibold tracking-wide cursor-pointer">
+            New Appointment
+          </button>
+        </Link>
+        <Link href="/create">
+          <button className="inline-block lg:hidden bg-blue-500 text-sm px-3 py-3 rounded-full text-white font-semibold tracking-wide cursor-pointer">
+            <FiPlus size={22} className="text-white" />
+          </button>
+        </Link>
       </div>
     </div>
   );

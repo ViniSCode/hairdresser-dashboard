@@ -1,5 +1,5 @@
 query GetCustomersAppointments ($status: Boolean!, $filterStatus: Boolean!, $search: String, $email: String!, $filterDate: Date, $today: Date, $tomorrow: Date, $limit: Int!, $offset: Int!) {
-    appointments (where: {date: $filterDate, customerStatus: $filterStatus, customer: {owner: {email: $email}, _search: $search}}, first: $limit, skip: $offset) {
+    appointments (where: {date: $filterDate, customerStatus: $filterStatus, customer: {owner: {email: $email}, _search: $search}}, first: $limit, skip: $offset, orderBy: createdAt_DESC) {
     service
     customerStatus
     date

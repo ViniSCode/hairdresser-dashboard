@@ -1219,7 +1219,7 @@ export type Customer = Node & {
   /** The unique identifier */
   id: Scalars['ID'];
   name: Scalars['String'];
-  number: Scalars['Int'];
+  number: Scalars['String'];
   owner?: Maybe<Owner>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
@@ -1318,7 +1318,7 @@ export type CustomerCreateInput = {
   appointments?: InputMaybe<AppointmentCreateManyInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   name: Scalars['String'];
-  number: Scalars['Int'];
+  number: Scalars['String'];
   owner?: InputMaybe<OwnerCreateOneInlineInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
@@ -1416,21 +1416,25 @@ export type CustomerManyWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
-  number?: InputMaybe<Scalars['Int']>;
-  /** All values greater than the given value. */
-  number_gt?: InputMaybe<Scalars['Int']>;
-  /** All values greater than or equal the given value. */
-  number_gte?: InputMaybe<Scalars['Int']>;
+  number?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  number_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  number_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  number_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  /** All values less than the given value. */
-  number_lt?: InputMaybe<Scalars['Int']>;
-  /** All values less than or equal the given value. */
-  number_lte?: InputMaybe<Scalars['Int']>;
+  number_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
-  number_not?: InputMaybe<Scalars['Int']>;
+  number_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  number_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  number_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  number_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  number_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  number_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  number_starts_with?: InputMaybe<Scalars['String']>;
   owner?: InputMaybe<OwnerWhereInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
@@ -1487,7 +1491,7 @@ export enum CustomerOrderByInput {
 export type CustomerUpdateInput = {
   appointments?: InputMaybe<AppointmentUpdateManyInlineInput>;
   name?: InputMaybe<Scalars['String']>;
-  number?: InputMaybe<Scalars['Int']>;
+  number?: InputMaybe<Scalars['String']>;
   owner?: InputMaybe<OwnerUpdateOneInlineInput>;
 };
 
@@ -1510,7 +1514,7 @@ export type CustomerUpdateManyInlineInput = {
 
 export type CustomerUpdateManyInput = {
   name?: InputMaybe<Scalars['String']>;
-  number?: InputMaybe<Scalars['Int']>;
+  number?: InputMaybe<Scalars['String']>;
 };
 
 export type CustomerUpdateManyWithNestedWhereInput = {
@@ -1632,21 +1636,25 @@ export type CustomerWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
-  number?: InputMaybe<Scalars['Int']>;
-  /** All values greater than the given value. */
-  number_gt?: InputMaybe<Scalars['Int']>;
-  /** All values greater than or equal the given value. */
-  number_gte?: InputMaybe<Scalars['Int']>;
+  number?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  number_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  number_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  number_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  /** All values less than the given value. */
-  number_lt?: InputMaybe<Scalars['Int']>;
-  /** All values less than or equal the given value. */
-  number_lte?: InputMaybe<Scalars['Int']>;
+  number_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
-  number_not?: InputMaybe<Scalars['Int']>;
+  number_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  number_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  number_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  number_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  number_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  number_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  number_starts_with?: InputMaybe<Scalars['String']>;
   owner?: InputMaybe<OwnerWhereInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
@@ -4854,6 +4862,13 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type GetAppointmentQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetAppointmentQuery = { __typename?: 'Query', appointments: Array<{ __typename?: 'Appointment', id: string, service: string, date: any, customer?: { __typename?: 'Customer', name: string, number: string, id: string, owner?: { __typename?: 'Owner', email: string } | null } | null }> };
+
 export type GetCustomersAppointmentsQueryVariables = Exact<{
   status: Scalars['Boolean'];
   filterStatus: Scalars['Boolean'];
@@ -4867,7 +4882,7 @@ export type GetCustomersAppointmentsQueryVariables = Exact<{
 }>;
 
 
-export type GetCustomersAppointmentsQuery = { __typename?: 'Query', appointments: Array<{ __typename?: 'Appointment', service: string, customerStatus: boolean, date: any, id: string, customer?: { __typename?: 'Customer', name: string, number: number, id: string } | null }>, pagination: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number }, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null } }, todayAppointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, tomorrowAppointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, completed: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, all: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number }, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null }, edges: Array<{ __typename?: 'AppointmentEdge', node: { __typename?: 'Appointment', service: string, customerStatus: boolean, date: any, id: string, customer?: { __typename?: 'Customer', name: string, number: number, id: string } | null } }> } };
+export type GetCustomersAppointmentsQuery = { __typename?: 'Query', appointments: Array<{ __typename?: 'Appointment', service: string, customerStatus: boolean, date: any, id: string, customer?: { __typename?: 'Customer', name: string, number: string, id: string } | null }>, pagination: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number }, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null } }, todayAppointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, tomorrowAppointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, completed: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, all: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number }, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null }, edges: Array<{ __typename?: 'AppointmentEdge', node: { __typename?: 'Appointment', service: string, customerStatus: boolean, date: any, id: string, customer?: { __typename?: 'Customer', name: string, number: string, id: string } | null } }> } };
 
 export type GetCustomerIfAlreadyExistsQueryVariables = Exact<{
   search?: InputMaybe<Scalars['String']>;
@@ -4875,7 +4890,7 @@ export type GetCustomerIfAlreadyExistsQueryVariables = Exact<{
 }>;
 
 
-export type GetCustomerIfAlreadyExistsQuery = { __typename?: 'Query', customers: Array<{ __typename?: 'Customer', name: string, id: string, number: number }>, customerPagination: { __typename?: 'CustomerConnection', aggregate: { __typename?: 'Aggregate', count: number }, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null } } };
+export type GetCustomerIfAlreadyExistsQuery = { __typename?: 'Query', customers: Array<{ __typename?: 'Customer', name: string, id: string, number: string }>, customerPagination: { __typename?: 'CustomerConnection', aggregate: { __typename?: 'Aggregate', count: number }, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null } } };
 
 export type GetOwnerCustomersQueryVariables = Exact<{
   email: Scalars['String'];
@@ -4884,7 +4899,7 @@ export type GetOwnerCustomersQueryVariables = Exact<{
 }>;
 
 
-export type GetOwnerCustomersQuery = { __typename?: 'Query', customers: Array<{ __typename?: 'Customer', name: string, number: number, id: string }>, pagination: { __typename?: 'CustomerConnection', aggregate: { __typename?: 'Aggregate', count: number }, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null } } };
+export type GetOwnerCustomersQuery = { __typename?: 'Query', customers: Array<{ __typename?: 'Customer', name: string, number: string, id: string }>, pagination: { __typename?: 'CustomerConnection', aggregate: { __typename?: 'Aggregate', count: number }, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, pageSize?: number | null } } };
 
 export type GetProfileStatsQueryVariables = Exact<{
   email: Scalars['String'];
@@ -4894,12 +4909,34 @@ export type GetProfileStatsQueryVariables = Exact<{
 export type GetProfileStatsQuery = { __typename?: 'Query', customers: { __typename?: 'CustomerConnection', aggregate: { __typename?: 'Aggregate', count: number } }, appointments: { __typename?: 'AppointmentConnection', aggregate: { __typename?: 'Aggregate', count: number } }, owner?: { __typename?: 'Owner', createdAt: any } | null };
 
 
+export const GetAppointmentDocument = gql`
+    query GetAppointment($id: ID!) {
+  appointments(where: {id: $id}) {
+    id
+    service
+    date
+    customer {
+      name
+      number
+      id
+      owner {
+        email
+      }
+    }
+  }
+}
+    `;
+
+export function useGetAppointmentQuery(options: Omit<Urql.UseQueryArgs<GetAppointmentQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetAppointmentQuery, GetAppointmentQueryVariables>({ query: GetAppointmentDocument, ...options });
+};
 export const GetCustomersAppointmentsDocument = gql`
     query GetCustomersAppointments($status: Boolean!, $filterStatus: Boolean!, $search: String, $email: String!, $filterDate: Date, $today: Date, $tomorrow: Date, $limit: Int!, $offset: Int!) {
   appointments(
     where: {date: $filterDate, customerStatus: $filterStatus, customer: {owner: {email: $email}, _search: $search}}
     first: $limit
     skip: $offset
+    orderBy: createdAt_DESC
   ) {
     service
     customerStatus

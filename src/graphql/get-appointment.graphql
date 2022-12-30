@@ -1,0 +1,15 @@
+query GetAppointment ($id: ID!) {
+  appointments (where: {id: $id}) {
+    id,
+    service,
+    date,
+    customer {
+      name, 
+      number,
+      id,
+      owner {
+        email
+      }
+    }
+  }
+}

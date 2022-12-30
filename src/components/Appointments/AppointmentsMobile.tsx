@@ -1,8 +1,5 @@
-import { AnimatePresence } from "framer-motion";
 import { AiOutlineEdit } from "react-icons/ai";
 import { GetCustomersAppointmentsQuery } from "../../generated/graphql";
-import { useModal } from "../../hooks/useModal";
-import { Modal } from "../Modal";
 import { Pagination } from "../Pagination";
 import { Cards } from "./Cards";
 import { TableActions } from "./TableActions";
@@ -30,14 +27,9 @@ export function AppointmentsMobile({
   productsPerPage,
   session,
 }: AppointmentsMobileProps) {
-  const {closeModal, openModal, isOpen} = useModal();
   return (
     <div className="w-full rounded-2xl bg-gray-900 mt-4 py-10">
       {data && <Cards card={data} />}
-
-      <AnimatePresence>
-        {isOpen && session && <Modal modalOpen={isOpen} handleClose={closeModal} />}
-      </AnimatePresence>
 
       <div className="mx-4 md:mx-10 mt-10 rounded-2xl">
         <div className="py-4 rounded-2xl w-full">

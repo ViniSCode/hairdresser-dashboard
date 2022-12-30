@@ -1,7 +1,4 @@
-import { AnimatePresence } from "framer-motion";
 import { GetCustomersAppointmentsQuery } from "../../generated/graphql";
-import { useModal } from "../../hooks/useModal";
-import { Modal } from "../Modal";
 import { Pagination } from "../Pagination";
 import { Appointment } from "./Appointment";
 import { Cards } from "./Cards";
@@ -32,39 +29,11 @@ export function AllAppointments({
   session,
   isAllAppointmentsSelected
 }: AllAppointments) {
-  const {closeModal, openModal, isOpen} = useModal();
 
-//   function handleCreateAppointment() {
-//   fetch('/api/mutations/appointments', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({
-//       name,
-//       number, 
-//       service
-//     }),
-//   })
-//     .then((response) => {
-//       if (response.ok) {
-//         // Redirect the user to the protected route
-//       } else {
-//         // Handle error
-//       }
-//     })
-//     .catch((error) => {
-//       // Handle error
-//     });
-// }
   return (
     <div className="w-full rounded-2xl bg-gray-900 mt-4 py-10">
       {data && <Cards card={data} />}
-
-      <AnimatePresence>
-        {isOpen && session && <Modal modalOpen={isOpen} handleClose={closeModal} session={session} />}
-      </AnimatePresence>
-
+      
       <div className="mx-4 md:mx-10 mt-10 rounded-2xl bg-gray-800">
         <div className="bg-gray-800 shadow px-4 py-4 md:p-8 rounded-2xl w-full">
           <TableActions setSearch={setSearch} search={search}/>

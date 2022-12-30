@@ -1,11 +1,10 @@
 import { RiPencilLine } from "react-icons/ri";
-import { useModal } from "../../hooks/useModal";
 
 interface AppointmentProps {
   name: string;
   status: boolean;
   service: string;
-  number: number;
+  number: string;
   id: string;
 }
 
@@ -16,8 +15,6 @@ export function Appointment({
   number,
   id,
 }: AppointmentProps) {
-  const {closeModal, openModal, isOpen} = useModal();
-
   return (
     <>
       <tr className="whitespace-nowrap">
