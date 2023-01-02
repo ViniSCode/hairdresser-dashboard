@@ -102,6 +102,19 @@ export default function Edit ({session}: any) {
       email = session.user?.email
     }
 
+    if (name.trim() == "" && data){
+      setName(data.appointments[0].customer!.name)
+    };
+    if (number.trim() == "" && data){
+      setNumber(data.appointments[0].customer!.number)
+    };
+    if (name.trim() == "" && data){
+      setDate(data.appointments[0].date)
+    };
+    if (service.trim() == "" && data){
+      setDate(data.appointments[0].service)
+    };
+
     await fetch('/api/mutations/deleteAppointment', {
       method: 'POST',
       headers: {

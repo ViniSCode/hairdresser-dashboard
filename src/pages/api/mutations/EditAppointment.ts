@@ -19,29 +19,27 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         },
         body: JSON.stringify({
           query: `
-          mutation MyMutation {
-            createAppointment(
+          mutation UpdateCustomerAppointment {
+            updateAppointment(
               data: {
-                customerStatus: ${status}, 
-                service: "${service}", 
-                date: "${date}", 
+                customerStatus: ${appointments[0].}, 
+                date: "${updatedDate}", 
+                service: "${updatedService}", 
                 customer: {
-                  create: {
-                    name: "${name}", 
-                    number: "${number}", 
-                    owner: {
-                      connect: {
-                        email: "${email}"
-                      }
+                  update: {
+                    where: {
+                      id: "${appointments[0].customer.id}"
+                    }, 
+                    data: {
+                      number: "${updatedCustomerNumber}", 
+                      name: "${updateCustomerName}"
                     }
                   }
                 }
               }
+              where: {id: "${appointmentId}"}
             ) {
-              id,
-              customer {
-                id
-              }
+              id
             }
           }
              

@@ -30,6 +30,7 @@ yarn-error.log*
 .env.local
 # vercel
 .vercel
+pages/api/*
 
 # typescript
 *.tsbuildinfo
