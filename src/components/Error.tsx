@@ -16,7 +16,7 @@ export default function Error() {
         <h1 className="text-5xl font-bold text-primary">Oops!</h1>
         <p className="text-2xl font-semibold text-secondary">Something went wrong</p>
         <Image src={"/error.svg"} width={200} height={300}/>
-        <p className="text-xl font-light text-tertiary">We're sorry, but something went wrong on our end. Please try again later.</p>
+        <p className="text-xl font-light text-tertiary">We are sorry, but something went wrong on our end. Please try again later.</p>
         <Link href="/">
           <a className="btn btn-primary mt-8 block px-2 py-4 bg-blue-500 transition-opacity hover:opacity-80">Go Back</a>
         </Link>
