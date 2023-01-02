@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { RiPencilLine } from "react-icons/ri";
 
 interface AppointmentProps {
@@ -15,6 +16,35 @@ export function Appointment({
   number,
   id,
 }: AppointmentProps) {
+  const router = useRouter();
+
+  async function handleStatus () {
+    
+    await fetch('/api/mutations/deleteAppointment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        status,
+        
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          router.push('/dashboard')
+        } else {
+          // Handle error
+        }
+      })
+      .catch((error) => {
+        // Handle error
+        console.log(error)
+      });    
+
+    return;
+  } 
+
   return (
     <>
       <tr className="whitespace-nowrap">
@@ -31,7 +61,7 @@ export function Appointment({
                 status ? "bg-green-500" : "bg-yellow-500"
               }`}
             ></span>
-            <span className="relative">
+            <span className="relative" onClick={handleStatus}>
               {status ? "complete" : "confirmed"}
             </span>
           </span>
@@ -47,7 +77,9 @@ export function Appointment({
           </p>
         </td>
         <td className="px-5 py-5 text-sm">
-          <RiPencilLine size={22} className="text-gray-500 cursor-pointer"/>
+          <a href={`/edit/${id}`}>
+            <RiPencilLine size={22} className="text-gray-500 cursor-pointer"/>
+          </a>
         </td>
       </tr>
     </>

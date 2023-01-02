@@ -30,7 +30,7 @@ export default function Dashboard({ session }: any) {
 
   useEffect(() => {
     const { today, tomorrow, filterDate } = GetCurrentDate();
-  
+    
     if (selected === 1) {
       setFilterDate(filterDate)
       setCustomerStatus(false)
@@ -87,7 +87,6 @@ export default function Dashboard({ session }: any) {
       filterStatus: customerStatus
     },
   });
-  
 
   return (
     <>

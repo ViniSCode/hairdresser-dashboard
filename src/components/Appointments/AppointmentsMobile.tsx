@@ -67,12 +67,14 @@ export function AppointmentsMobile({
                       <p className="truncate flex-1 text-sm mt-1 text-gray-400 font-medium">
                         {appointment.customer!.number}
                       </p>
-                      <div className="w-fit max-w-fit flex-1 cursor-pointer flex items-center gap-1">
-                        <p className="truncate flex-1 text-sm text-gray-500 font-medium cursor-pointer">
-                          Edit
-                        </p>
-                        <AiOutlineEdit size={18} className="text-gray-500" />
-                      </div>
+                      <a href={`/edit/${appointment.id}`}>
+                        <div className="w-fit max-w-fit flex-1 cursor-pointer flex items-center gap-1">
+                          <p className="truncate flex-1 text-sm text-gray-500 font-medium cursor-pointer">
+                            Edit
+                          </p>
+                          <AiOutlineEdit size={18} className="text-gray-500" />
+                        </div>
+                      </a>
                     </div>
                   </div>
                 ))}

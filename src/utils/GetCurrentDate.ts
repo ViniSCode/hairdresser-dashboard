@@ -8,4 +8,5 @@ export function GetCurrentDate () {
     tomorrow: tomorrow.toISOString().toString(),
     filterDate: today,
   }
+
 }

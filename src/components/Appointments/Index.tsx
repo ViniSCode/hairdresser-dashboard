@@ -27,29 +27,8 @@ export function Appointments({
   search,
   session,
 }: AppointmentsProps) {
-//   function handleCreateAppointment() {
-//   fetch('/api/mutations/appointments', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({
-//       name,
-//       number, 
-//       service
-//     }),
-//   })
-//     .then((response) => {
-//       if (response.ok) {
-//         // Redirect the user to the protected route
-//       } else {
-//         // Handle error
-//       }
-//     })
-//     .catch((error) => {
-//       // Handle error
-//     });
-// }
+
+
   return (
     <div className="w-full rounded-2xl bg-gray-900 mt-4 py-10">
       {data && <Cards card={data} />}

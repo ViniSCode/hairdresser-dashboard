@@ -2,6 +2,7 @@ query GetAppointment ($id: ID!) {
   appointments (where: {id: $id}) {
     id,
     service,
+    customerStatus,
     date,
     customer {
       name, 
