@@ -3,7 +3,6 @@ import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/dist/client/router";
 import { FormEvent, useState } from "react";
-import { BsCheck2Circle, BsCircle } from "react-icons/bs";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { toast } from "react-toastify";
 import Error from "../../components/Error";
@@ -29,14 +28,26 @@ const dropIn = {
 }
 
 export default function Edit ({session}: any) {
-  const [loading, setLoading] = useState(false);
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");  
-  const [service, setService] = useState("");
-  const [date, setDate] = useState("");
-  const [status, setStatus] = useState(false);
   const router = useRouter();
   const id = router.query.appointmentId as string;
+  const [{data}] = useGetAppointmentQuery({
+    variables: {
+      id
+    }
+  });
+
+  // // useRef instead of useEffect, cause useState cause it's re-rendering everytime the input changes
+  // const defaultName = data?.appointments[0]?.customer?.name || "";
+  // const defaultNumber = data?.appointments[0]?.customer?.number || ""
+  // const defaultService = data?.appointments[0]?.service || ""
+  // const defaultDate = data?.appointments[0]?.date || ""
+
+  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState(data?.appointments[0]?.customer?.name || "");
+  const [number, setNumber] = useState(data?.appointments[0]?.customer?.number || "");
+  const [service, setService] = useState(data?.appointments[0]?.service || "");
+  const [date, setDate] = useState(data?.appointments[0]?.date || "");
+  const [status, setStatus] = useState(data?.appointments[0]?.customerStatus || false);
 
   async function handleUpdateAppointment (event: FormEvent) {
     event.preventDefault();
@@ -108,7 +119,7 @@ export default function Edit ({session}: any) {
     if (number.trim() == "" && data){
       setNumber(data.appointments[0].customer!.number)
     };
-    if (name.trim() == "" && data){
+    if (date.trim() == "" && data){
       setDate(data.appointments[0].date)
     };
     if (service.trim() == "" && data){
@@ -144,17 +155,22 @@ export default function Edit ({session}: any) {
 
     return;
   }
-  
-  const [{data}] = useGetAppointmentQuery({
-    variables: {
-      id
-    }
-  });
+
+  // useEffect(() => {
+  //   if (!data){
+  //     return 
+  //   }
+
+  //   setName(data.appointments[0].customer.name)
+  // }, [data])
+
+
+  console.log(data)
 
   return data ? (
     <div className="pb-10">
       <motion.div 
-        className="mx-auto mt-10 md:mt-28 px-8 py-8 lg:px-8 flex items-center justify-center rounded-xl w-[90%] md:w-[80%] h-full min-h-[740px] max-h-[1000px] max-w-[700px] md:max-h-[650px] md:max-w-[700px] bg-gray-900"
+        className="mx-auto mt-8 md:mt-14 px-8 py-8 lg:px-8 flex items-center justify-center rounded-xl w-[90%] md:w-[80%] h-full min-h-[780px] max-h-[1000px] max-w-[700px] md:max-h-[700] md:max-w-[700px] bg-gray-900"
         variants={dropIn}
         initial="hidden"
         animate="visible"
@@ -172,7 +188,7 @@ export default function Edit ({session}: any) {
                 type="text"
                 className="mt-2 w-full mx-auto max-w-[100%] rounded-lg px-4 py-2 border border-[#47527c] bg-gray-800 placeholder:text-sm shadow-md placeholder:font-bold" 
                 onChange={(e) => setName(e.target.value)}
-                // value={}
+                value={name}
               />
             </div>
             <div className="w-full lg:w-3/4 md:w-[80%]">
@@ -190,11 +206,15 @@ export default function Edit ({session}: any) {
 
             <div className="w-full lg:w-3/4 md:w-[80%]">
               <label htmlFor="number" className="text-sm md:text-md">Service status:</label>
-              <div className="flex items-center justify-center gap-4 mt-4 bg-gray-800 py-2 rounded-md border border-[#47527c]">
-                <button className="bg-yellow-500 w-6 h-6 rounded-full flex items-center justify-center hover:bg-yellow-400 transition-colors" onClick={() => setStatus(false)}>{!status ? <BsCheck2Circle size={25} /> : <BsCircle size={25} />}</button>
-                <label htmlFor="age1">Confirmed</label>
-                <button className="bg-green-500 w-6 h-6 rounded-full flex items-center justify-center hover:bg-green-400 transition-colors" onClick={() => setStatus(true)}>{status ? <BsCheck2Circle size={25} /> : <BsCircle size={25} />}</button>
-                <label htmlFor="age2">Complete</label>
+              <div className="flex flex-col items-start justify-center gap-4 mt-4 py-2 rounded-md">
+                <div className="flex items-center gap-4">
+                  <input type="radio" name="status" className="bg-yellow-500 w-6 h-6 rounded-full flex items-center justify-center hover:bg-yellow-400 transition-colors" onClick={() => setStatus(false)} />
+                  <label htmlFor="age1" className="text-yellow-500 font-bold">Confirmed</label>
+                </div>
+                <div className="flex items-center gap-4">
+                  <input type="radio" name="status" className="bg-yellow-500 w-6 h-6 rounded-full flex items-center justify-center hover:bg-yellow-400 transition-colors" onClick={() => setStatus(false)} />
+                  <label htmlFor="age2" className="text-green-500 font-bold">Complete</label>
+                </div>
               </div>
             </div>
 

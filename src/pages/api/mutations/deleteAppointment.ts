@@ -13,6 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }).toPromise();
     
     if (appointmentId === appointments[0].id && appointments[0].customer.owner.email === email) {
+      console.log('oijoijios')
       await fetch(
         `https://api-sa-east-1.hygraph.com/v2/cla71chwd0qx901uo0ry870iq/master`,
         {
@@ -23,11 +24,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           },
           body: JSON.stringify({
             query: `
-            mutation MyMutation {
+            mutation DeleteCustomerAppointment {
               deleteAppointment(where: {id: "${appointments[0].id}"}) {
                 id
               }
-              publishCustomer (where: {id: "${appointments.customer.id}"}) {
+              publishCustomer (where: {id: "${appointments[0].customer.id}"}) {
                 id
               }
             }
@@ -35,21 +36,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             `,
           }),
         }
-      ).then(response => {
-        if (response.ok) {
-          
-        } else {
-          throw new Error('Something went wrong')
-        }
-      })
-
-      // const data = await response.json();
-      // createdAppointmentId = data.data.createAppointment.id
-      // createdUserId = data.data.createAppointment.customer.id
-
-      // Make the publishAppointment, publishCustomer, and publishOwner mutations
-      
-      // await publishAppointment(createdAppointmentId, createdUserId, email);
+      )
 
     } else {
       throw new Error('Something went wrong')

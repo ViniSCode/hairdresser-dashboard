@@ -9,52 +9,52 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     // Make the createAppointment mutation and wait for it to complete
 
-    const response = await fetch(
-      `https://api-sa-east-1.hygraph.com/v2/cla71chwd0qx901uo0ry870iq/master`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${process.env.API_ACCESS_TOKEN}`,
-        },
-        body: JSON.stringify({
-          query: `
-          mutation UpdateCustomerAppointment {
-            updateAppointment(
-              data: {
-                customerStatus: ${appointments[0].}, 
-                date: "${updatedDate}", 
-                service: "${updatedService}", 
-                customer: {
-                  update: {
-                    where: {
-                      id: "${appointments[0].customer.id}"
-                    }, 
-                    data: {
-                      number: "${updatedCustomerNumber}", 
-                      name: "${updateCustomerName}"
-                    }
-                  }
-                }
-              }
-              where: {id: "${appointmentId}"}
-            ) {
-              id
-            }
-          }
+    // const response = await fetch(
+    //   `https://api-sa-east-1.hygraph.com/v2/cla71chwd0qx901uo0ry870iq/master`,
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       "Authorization": `Bearer ${process.env.API_ACCESS_TOKEN}`,
+    //     },
+    //     body: JSON.stringify({
+    //       query: `
+    //       mutation UpdateCustomerAppointment {
+    //         updateAppointment(
+    //           data: {
+    //             customerStatus: ${appointments[0].}, 
+    //             date: "${updatedDate}", 
+    //             service: "${updatedService}", 
+    //             customer: {
+    //               update: {
+    //                 where: {
+    //                   id: "${appointments[0].customer.id}"
+    //                 }, 
+    //                 data: {
+    //                   number: "${updatedCustomerNumber}", 
+    //                   name: "${updateCustomerName}"
+    //                 }
+    //               }
+    //             }
+    //           }
+    //           where: {id: "${appointmentId}"}
+    //         ) {
+    //           id
+    //         }
+    //       }
              
-          `,
-        }),
-      }
-    )
+    //       `,
+    //     }),
+    //   }
+    // )
 
-    const data = await response.json();
-    createdAppointmentId = data.data.createAppointment.id
-    createdUserId = data.data.createAppointment.customer.id
+    // const data = await response.json();
+    // createdAppointmentId = data.data.createAppointment.id
+    // createdUserId = data.data.createAppointment.customer.id
 
-    // Make the publishAppointment, publishCustomer, and publishOwner mutations
+    // // Make the publishAppointment, publishCustomer, and publishOwner mutations
     
-    await publishAppointment(createdAppointmentId, createdUserId, email);
+    // await publishAppointment(createdAppointmentId, createdUserId, email);
 
     res.status(200).redirect('/dashboard');
   } catch (error: any) {

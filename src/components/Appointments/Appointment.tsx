@@ -45,6 +45,8 @@ export function Appointment({
     return;
   } 
 
+
+  console.log(status)
   return (
     <>
       <tr className="whitespace-nowrap">
@@ -57,7 +59,7 @@ export function Appointment({
           <span className="relative inline-block px-3 py-1 font-semibold text-white leading-tight">
             <span
               aria-hidden
-              className={`absolute inset-0 bg-gray-500 opacity-50 rounded-full ${
+              className={`absolute inset-0 opacity-50 rounded-full ${
                 status ? "bg-green-500" : "bg-yellow-500"
               }`}
             ></span>

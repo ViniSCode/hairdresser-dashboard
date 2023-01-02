@@ -4867,7 +4867,7 @@ export type GetAppointmentQueryVariables = Exact<{
 }>;
 
 
-export type GetAppointmentQuery = { __typename?: 'Query', appointments: Array<{ __typename?: 'Appointment', id: string, service: string, date: any, customer?: { __typename?: 'Customer', name: string, number: string, id: string, owner?: { __typename?: 'Owner', email: string } | null } | null }> };
+export type GetAppointmentQuery = { __typename?: 'Query', appointments: Array<{ __typename?: 'Appointment', id: string, service: string, customerStatus: boolean, date: any, customer?: { __typename?: 'Customer', name: string, number: string, id: string, owner?: { __typename?: 'Owner', email: string } | null } | null }> };
 
 export type GetCustomersAppointmentsQueryVariables = Exact<{
   status: Scalars['Boolean'];
@@ -4921,6 +4921,7 @@ export const GetAppointmentDocument = gql`
   appointments(where: {id: $id}) {
     id
     service
+    customerStatus
     date
     customer {
       name
